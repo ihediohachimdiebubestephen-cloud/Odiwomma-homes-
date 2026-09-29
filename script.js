@@ -13,14 +13,17 @@ document.addEventListener("DOMContentLoaded", function(){
   if(!productGrid) return;
 
   const products = [
-    {id:"interior-paint",name:"Interior Painting",category:"painting",desc:"Professional interior painting for rooms, apartments, offices and living spaces.",initial:"IP"},
-    {id:"exterior-paint",name:"Exterior Painting",category:"painting",desc:"Exterior painting for walls, facades and other outdoor surfaces. Request a project quote.",initial:"EP"},
-    {id:"decorative-finish",name:"Decorative Wall Finish",category:"finishes",desc:"Decorative and textured wall finishes for feature walls and statement spaces.",initial:"DF"},
-    {id:"wall-preparation",name:"Wall Preparation",category:"materials",desc:"Surface preparation, repairs and priming before painting or decorative finishing.",initial:"WP"},
-    {id:"colour-consultation",name:"Colour Consultation",category:"services",desc:"Help choosing colours and combinations that suit your space, lighting and style.",initial:"CC"},
-    {id:"home-improvement",name:"Home Improvement Request",category:"services",desc:"Tell us what needs attention and we will discuss the materials, labour and next steps.",initial:"HI"}
+    {id:"silk-paint",name:"Silk Paint",category:"painting",desc:"Smooth decorative paint suitable for creating a refined interior finish.",initial:"SP"},
+    {id:"matt-emulsion-paint",name:"Matt Emulsion Paint",category:"painting",desc:"Matt-finish paint for interior walls and ceilings.",initial:"ME"},
+    {id:"emulsion-paint",name:"Emulsion Paint",category:"painting",desc:"Versatile water-based paint for interior wall and ceiling applications.",initial:"EP"},
+    {id:"textcoat-paint",name:"Textcoat Paint",category:"finishes",desc:"Textured coating for decorative and protective wall finishes.",initial:"TP"},
+    {id:"gravitex-paint",name:"Gravitex Paint",category:"finishes",desc:"Textured decorative coating for distinctive wall surfaces and finishes.",initial:"GP"},
+    {id:"primer",name:"Primer",category:"materials",desc:"Preparation coating used to help create a suitable surface before finishing.",initial:"PR"},
+    {id:"oil-paint",name:"Oil Paint",category:"painting",desc:"Oil-based paint for suitable surfaces and finishing applications.",initial:"OP"},
+    {id:"potty",name:"Potty",category:"materials",desc:"Material for wall preparation and surface finishing applications.",initial:"PT"},
+    {id:"mineral-stone-paint",name:"Mineral Stone Paint",category:"finishes",desc:"Decorative stone-effect coating for distinctive wall surfaces.",initial:"MS"},
+    {id:"screeding-paint",name:"Screeding Paint",category:"materials",desc:"Paint/coating option for prepared and screeded surfaces.",initial:"SC"}
   ];
-
   const cartKey = "odw_cart_v1";
   let cart = JSON.parse(localStorage.getItem(cartKey) || "[]");
   const search = document.querySelector("#shop-search");
