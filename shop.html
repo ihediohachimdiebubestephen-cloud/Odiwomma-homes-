@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="OdiwommaHome, professional painting, finishing and home improvement.">
+<meta name="description" content="Shop OdiwommaHome products and request a WhatsApp order or quote.">
 <title>Shop | OdiwommaHome</title>
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -15,61 +15,72 @@
     <a href="index.html" aria-label="OdiwommaHome home"><img class="logo" src="logo.jpg" alt="OdiwommaHome logo"></a>
     <button class="menu" aria-label="Open navigation" aria-expanded="false">Menu</button>
     <nav class="nav-links" aria-label="Main navigation">
-      <a href="index.html" class="">Home</a><a href="projects.html" class="">Projects</a><a href="services.html" class="">Services</a><a href="finishes.html" class="">Finishes</a><a href="about.html" class="">About</a><a href="contact.html" class="">Contact</a><a href="shop.html" class="active">Shop</a>
+      <a href="index.html">Home</a><a href="projects.html">Projects</a><a href="services.html">Services</a><a href="finishes.html">Finishes</a><a href="about.html">About</a><a href="contact.html">Contact</a><a href="shop.html" class="active">Shop</a>
+      <button class="cart-nav" type="button" data-open-cart>Cart <span class="cart-count">0</span></button>
       <a class="nav-cta" href="contact.html">Start a Project</a>
     </nav>
   </div>
 </header>
 
-
 <main>
-<section class="page-hero"><div class="container"><div class="eyebrow">OdiwommaHome Shop</div><h1>Products for<br><em>your next project.</em></h1><p>The online store is being prepared. This page is structured to grow into a full product catalogue, cart and checkout experience.</p></div></section>
-<section class="section"><div class="container">
-<div class="shop-banner"><div class="eyebrow">Coming next</div><h2>Paints, materials and home essentials.</h2><p>Product listings, pricing, cart, customer accounts and secure payment will be connected as the store is developed.</p><a class="btn" href="contact.html">Contact Us</a></div>
-</div></section>
+<section class="page-hero"><div class="container"><div class="eyebrow">OdiwommaHome Shop</div><h1>Choose what you need for<br><em>your next project.</em></h1><p>Browse our starter catalogue, add what you need to your cart, then send the order or quote request directly to WhatsApp.</p></div></section>
+
+<section class="section shop-section">
+  <div class="container">
+    <div class="shop-toolbar">
+      <div>
+        <div class="eyebrow">Catalogue</div>
+        <h2>Shop OdiwommaHome</h2>
+      </div>
+      <div class="shop-actions">
+        <label class="sr-only" for="shop-search">Search products</label>
+        <input id="shop-search" class="shop-search" type="search" placeholder="Search products...">
+        <select id="shop-category" class="shop-select" aria-label="Filter products">
+          <option value="all">All categories</option>
+          <option value="painting">Painting</option>
+          <option value="finishes">Decorative finishes</option>
+          <option value="materials">Materials</option>
+          <option value="services">Services</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="shop-note"><strong>Ordering:</strong> Prices can be confirmed before payment. Add your items, review your cart, then send your order or quote request to OdiwommaHome on WhatsApp.</div>
+
+    <div id="product-grid" class="product-grid" aria-live="polite"></div>
+    <div id="empty-products" class="empty-products" hidden>No products match your search.</div>
+  </div>
+</section>
+
+<section class="section section-soft"><div class="container"><div class="shop-banner"><div><div class="eyebrow">Need something custom?</div><h2>Tell us what your project needs.</h2><p>For large quantities, colour matching, special finishes or materials not shown here, send us a message and we will prepare a quote.</p></div><a class="btn" href="https://wa.me/2349046193188" target="_blank" rel="noopener">Chat on WhatsApp</a></div></div></section>
 </main>
 
+<div class="cart-backdrop" data-close-cart></div>
+<aside class="cart-drawer" aria-label="Shopping cart" aria-hidden="true">
+  <div class="cart-head"><div><div class="eyebrow">Your order</div><h2>Cart</h2></div><button class="cart-close" type="button" data-close-cart aria-label="Close cart">×</button></div>
+  <div id="cart-items" class="cart-items"></div>
+  <div id="cart-empty" class="cart-empty">Your cart is empty. Add something from the catalogue.</div>
+  <div class="cart-foot">
+    <div class="cart-total-row"><span>Items</span><strong id="cart-total-items">0</strong></div>
+    <div class="cart-total-row"><span>Total</span><strong id="cart-total">Price on request</strong></div>
+    <button class="btn btn-full" id="whatsapp-order" type="button">Send order on WhatsApp</button>
+    <button class="btn btn-light btn-full" id="clear-cart" type="button">Clear cart</button>
+    <p class="cart-help">WhatsApp will open with your order details already prepared. You can confirm prices, delivery and payment with us before paying.</p>
+  </div>
+</aside>
 
 <footer>
   <div class="container">
     <div class="footer-grid">
-      <div>
-        <img class="footer-logo" src="logo.jpg" alt="OdiwommaHome logo">
-        <p>Professional painting, decorative finishes and practical home improvement for spaces that feel considered and complete.</p>
-      </div>
-      <div>
-        <div class="footer-title">Explore</div>
-        <div class="footer-links">
-          <a href="projects.html">Projects</a>
-          <a href="services.html">Services</a>
-          <a href="finishes.html">Finishes</a>
-        </div>
-      </div>
-      <div>
-        <div class="footer-title">Company</div>
-        <div class="footer-links">
-          <a href="about.html">About</a>
-          <a href="contact.html">Contact</a>
-          <a href="shop.html">Shop</a>
-        </div>
-      </div>
-      <div>
-        <div class="footer-title">Contact</div>
-        <div class="footer-links">
-          <a href="https://wa.me/2349046193188" target="_blank" rel="noopener">WhatsApp: 0904 619 3188</a>
-          <span>Owerri, Imo State</span>
-          <span>Serving clients nationwide</span>
-        </div>
-      </div>
+      <div><img class="footer-logo" src="logo.jpg" alt="OdiwommaHome logo"><p>Professional painting, decorative finishes and practical home improvement for spaces that feel considered and complete.</p></div>
+      <div><div class="footer-title">Explore</div><div class="footer-links"><a href="projects.html">Projects</a><a href="services.html">Services</a><a href="finishes.html">Finishes</a></div></div>
+      <div><div class="footer-title">Company</div><div class="footer-links"><a href="about.html">About</a><a href="contact.html">Contact</a><a href="shop.html">Shop</a></div></div>
+      <div><div class="footer-title">Contact</div><div class="footer-links"><a href="https://wa.me/2349046193188" target="_blank" rel="noopener">WhatsApp: 0904 619 3188</a><span>Owerri, Imo State</span><span>Serving clients nationwide</span></div></div>
     </div>
-    <div class="footer-bottom">
-      <span>© 2026 OdiwommaHome</span>
-      <span>Transforming spaces. Creating beautiful identities.</span>
-    </div>
+    <div class="footer-bottom"><span>© 2026 OdiwommaHome</span><span>Transforming spaces. Creating beautiful identities.</span></div>
   </div>
 </footer>
 <a class="whatsapp" href="https://wa.me/2349046193188" target="_blank" rel="noopener">WhatsApp</a>
 <script src="script.js"></script>
-
 </body>
 </html>
