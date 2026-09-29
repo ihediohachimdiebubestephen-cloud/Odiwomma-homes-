@@ -145,3 +145,30 @@ footer a:hover{color:white}
   .footer-bottom span{display:block;margin-top:7px}
   .whatsapp{right:12px;bottom:12px}
 }
+
+/* Shop and cart */
+.shop-section{padding-top:64px}
+.shop-toolbar{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:26px}
+.shop-toolbar h2{margin:6px 0 0}
+.shop-actions{display:flex;gap:10px;align-items:center}
+.shop-search,.shop-select{height:46px;border:1px solid #d9d9d9;border-radius:10px;background:#fff;padding:0 13px;font:inherit;color:inherit}
+.shop-search{width:220px}.shop-select{min-width:170px}
+.shop-note{padding:16px 18px;border:1px solid #e3e3e3;border-radius:12px;background:#fafafa;margin-bottom:30px;font-size:.95rem}
+.product-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.product-card{border:1px solid #e4e4e4;border-radius:16px;overflow:hidden;background:#fff;display:flex;flex-direction:column;min-width:0}
+.product-visual{height:170px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#f1f1ee,#dddcd6);position:relative}
+.product-initial{font-size:3rem;font-weight:800;letter-spacing:-.05em;color:#333}
+.product-tag{position:absolute;top:14px;left:14px;background:#fff;border-radius:999px;padding:6px 10px;font-size:.75rem;font-weight:700}
+.product-body{padding:20px;display:flex;flex-direction:column;gap:10px;flex:1}
+.product-body h3{margin:0;font-size:1.15rem}.product-body p{margin:0;color:#666;line-height:1.55;font-size:.92rem}.product-meta{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:auto;padding-top:8px}.product-price{font-weight:800}.quote-price{font-size:.85rem;color:#666;font-weight:600}
+.product-add{width:100%;margin-top:10px}
+.cart-nav{border:1px solid rgba(0,0,0,.15);background:transparent;border-radius:999px;padding:10px 13px;font:inherit;cursor:pointer;color:inherit}
+.cart-count{display:inline-grid;place-items:center;min-width:22px;height:22px;padding:0 5px;border-radius:999px;background:#111;color:#fff;font-size:.75rem;margin-left:4px}
+.cart-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.42);opacity:0;visibility:hidden;transition:.25s;z-index:90}
+.cart-drawer{position:fixed;top:0;right:0;width:min(440px,94vw);height:100dvh;background:#fff;z-index:91;transform:translateX(105%);transition:.3s;display:flex;flex-direction:column;box-shadow:-15px 0 50px rgba(0,0,0,.18)}
+.cart-open .cart-backdrop{opacity:1;visibility:visible}.cart-open .cart-drawer{transform:translateX(0)}
+.cart-head{padding:28px 24px 18px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:flex-start}.cart-head h2{margin:4px 0 0}.cart-close{border:0;background:#f1f1f1;width:40px;height:40px;border-radius:50%;font-size:1.5rem;cursor:pointer}
+.cart-items{padding:18px 24px;overflow:auto;flex:1}.cart-row{display:grid;grid-template-columns:1fr auto;gap:12px;padding:16px 0;border-bottom:1px solid #eee}.cart-row h3{font-size:1rem;margin:0 0 5px}.cart-row p{margin:0;color:#777;font-size:.85rem}.cart-controls{display:flex;align-items:center;gap:8px;margin-top:10px}.qty-btn,.remove-item{border:1px solid #ddd;background:#fff;border-radius:7px;cursor:pointer}.qty-btn{width:30px;height:30px}.remove-item{padding:7px 9px;font-size:.78rem}.cart-empty{padding:30px 24px;color:#777;text-align:center}.cart-foot{padding:20px 24px;border-top:1px solid #eee;background:#fafafa}.cart-total-row{display:flex;justify-content:space-between;margin-bottom:10px}.btn-full{width:100%;margin-top:10px}.btn-light{background:#fff;color:#222;border:1px solid #ddd}.cart-help{font-size:.78rem;color:#777;line-height:1.5;margin:12px 0 0}.empty-products{text-align:center;padding:50px;color:#777}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:900px){.product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.shop-toolbar{align-items:stretch;flex-direction:column}.shop-actions{width:100%}.shop-search{flex:1;width:auto}.shop-select{min-width:160px}}
+@media(max-width:600px){.product-grid{grid-template-columns:1fr}.shop-actions{flex-direction:column}.shop-search,.shop-select{width:100%}.cart-nav{margin:8px 0}}
