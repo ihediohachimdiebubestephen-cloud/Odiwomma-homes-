@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Shop OdiwommaHome products and request a WhatsApp order or quote.">
+<meta name="description" content="Shop OdiwommaHome products and place orders online.">
 <title>Shop | OdiwommaHome</title>
 <link rel="stylesheet" href="styles.css">
 <style>
@@ -35,12 +35,12 @@
 <a class="nav-cta" href="contact.html">Start a Project</a>
 </nav></div></header>
 <main>
-<section class="page-hero"><div class="container"><div class="eyebrow">OdiwommaHome Shop</div><h1>Choose what you need for<br><em>your next project.</em></h1><p>Browse our product catalogue, add what you need to your cart, then send your order or quote request directly to WhatsApp.</p></div></section>
+<section class="page-hero"><div class="container"><div class="eyebrow">OdiwommaHome Shop</div><h1>Choose what you need for<br><em>your next project.</em></h1><p>Browse our product catalogue, add what you need to your cart, then complete your order securely on the website.</p></div></section>
 <section class="section shop-section"><div class="container">
 <div class="shop-toolbar"><div><div class="eyebrow">Catalogue</div><h2>Shop OdiwommaHome</h2></div>
 <div class="shop-actions"><label class="sr-only" for="shop-search">Search products</label><input id="shop-search" class="shop-search" type="search" placeholder="Search products...">
 <select id="shop-category" class="shop-select" aria-label="Filter products"><option value="all">All categories</option><option value="painting">Paints</option><option value="finishes">Decorative finishes</option><option value="materials">Preparation & materials</option></select></div></div>
-<div class="shop-note"><strong>Ordering:</strong> Prices are shown in Nigerian Naira (₦). Add your items, review your cart, then send your order to OdiwommaHome on WhatsApp. We will confirm availability and delivery details before payment.</div>
+<div class="shop-note"><strong>Ordering:</strong> Prices are shown in Nigerian Naira (₦). Add your items, review your cart, then complete checkout on the website. You will receive an order reference after submission.</div>
 <div id="product-grid" class="product-grid" aria-live="polite"></div><div id="empty-products" class="empty-products" hidden>No products match your search.</div>
 </div></section>
 <section class="section section-soft"><div class="container"><div class="shop-banner"><div><div class="eyebrow">Need something custom?</div><h2>Tell us what your project needs.</h2><p>For large quantities, colour matching, special finishes or materials not shown here, send us a message and we will prepare a quote.</p></div><a class="btn" href="https://wa.me/2349046193188" target="_blank" rel="noopener">Chat on WhatsApp</a></div></div></section>
@@ -51,7 +51,7 @@
 <div id="cart-items" class="cart-items"></div><div id="cart-empty" class="cart-empty">Your cart is empty. Add something from the catalogue.</div>
 <div class="cart-foot"><div class="cart-total-row"><span>Items</span><strong id="cart-total-items">0</strong></div><div class="cart-total-row"><span>Total</span><strong id="cart-total">Price on request</strong></div>
 <button class="btn btn-full" id="checkout-order" type="button">Continue to checkout</button><button class="btn btn-light btn-full" id="clear-cart" type="button">Clear cart</button>
-<p class="cart-help">Prices are shown in Nigerian Naira (₦). Your order total will be included in the WhatsApp message. Payment is handled after availability and delivery details are confirmed.</p></div></aside>
+<p class="cart-help">Your order is saved to your OdiwommaHome account. Payment can be completed on the website when online payment is connected.</p></div></aside>
 <div class="checkout-backdrop" id="checkout-backdrop"></div>
 <section class="checkout-modal" id="checkout-modal" aria-hidden="true" aria-labelledby="checkout-title">
 <div class="checkout-head"><div><div class="eyebrow">Order details</div><h2 id="checkout-title">Checkout</h2></div><button class="cart-close" id="checkout-close" type="button" aria-label="Close checkout">×</button></div>
@@ -60,9 +60,9 @@
 <div class="field"><label for="customer-phone">Phone number</label><input id="customer-phone" name="phone" type="tel" autocomplete="tel" required placeholder="0800 000 0000"></div>
 <div class="field full"><label for="customer-address">Delivery address</label><textarea id="customer-address" name="address" autocomplete="street-address" required placeholder="Where should we deliver?"></textarea></div>
 <div class="field full"><label for="customer-note">Order note <span class="optional">(optional)</span></label><textarea id="customer-note" name="note" placeholder="Colour preference, quantity details or anything else we should know."></textarea></div></div>
-<button class="btn btn-full" type="submit">Send order to WhatsApp</button>
-<p class="cart-help">WhatsApp will open with your name, phone number, address, selected products and order total. We will confirm availability, delivery and payment with you.</p></form></div>
-<div class="order-success" id="order-success" hidden><div class="success-mark">✓</div><div class="eyebrow">Order prepared</div><h2>Your order is ready.</h2><p>WhatsApp should open with your order details. Your order is also linked to your customer account when you are signed in.</p><button class="btn btn-full" id="success-close" type="button">Back to shop</button></div>
+<button class="btn btn-full" type="submit">Place order</button>
+<p class="cart-help">Your order will be saved to your customer account. You can track its status from My Account.</p></form></div>
+<div class="order-success" id="order-success" hidden><div class="success-mark">✓</div><div class="eyebrow">Order received</div><h2>Your order has been placed.</h2><p id="success-message">Your order has been saved to your OdiwommaHome account. Keep your order reference for tracking.</p><a class="btn btn-full" id="success-account" href="account.html">View My Account</a><button class="btn btn-light btn-full" id="success-close" type="button">Back to shop</button></div>
 </section>
 <footer><div class="container"><div class="footer-grid">
 <div><img class="footer-logo" src="logo.jpg" alt="OdiwommaHome logo"><p>Professional painting, decorative finishes and practical home improvement for spaces that feel considered and complete.</p></div>
