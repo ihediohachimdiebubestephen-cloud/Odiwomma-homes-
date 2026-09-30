@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>My Account | OdiwommaHome</title><link rel="stylesheet" href="styles.css">
+<style>
+.account-wrap{padding:40px 18px 80px}.account-head{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:24px}.account-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:18px}.account-card{background:#fff;border:1px solid #e8e8e8;border-radius:6px;padding:22px}.account-card form{display:grid;gap:14px}.account-card input,.account-card textarea,.account-card select{width:100%;padding:12px;border:1px solid #ddd;border-radius:4px;box-sizing:border-box}.account-card label{font-size:.82rem;font-weight:700}.account-muted{color:#777;line-height:1.6}.account-message{margin-top:12px;padding:10px;background:#f6f6f6;border-radius:4px}.account-error{color:#a33}.order-card{border:1px solid #eee;border-radius:5px;padding:15px;margin-bottom:12px}.order-top{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}.order-meta{font-size:.88rem;color:#777;margin:7px 0}.order-items{white-space:pre-line;line-height:1.5}.badge{display:inline-block;padding:5px 8px;border:1px solid #ddd;border-radius:4px;font-size:.78rem}.empty{padding:18px;background:#fafafa;color:#777}.hidden{display:none!important}
+@media(max-width:800px){.account-grid{grid-template-columns:1fr}.account-head{align-items:start;flex-direction:column}}
+</style></head><body>
+<div class="topbar"><div class="container"><span>OdiwommaHome</span><span>Painting · Finishing · Home Improvement</span></div></div>
+<header class="site-header"><div class="container nav">
+<a href="index.html"><img class="logo" src="logo.jpg" alt="OdiwommaHome logo"></a>
+<nav class="nav-links"><a href="index.html">Home</a><a href="shop.html">Shop</a><a href="contact.html">Contact</a><button class="btn btn-light" id="logout">Log out</button></nav>
+</div></header>
+<main class="account-wrap container">
+<div class="account-head"><div><div class="eyebrow">Customer account</div><h1>My Account</h1><p id="account-email" class="account-muted"></p></div></div>
+<div class="account-grid">
+<section class="account-card"><h2>My details</h2><form id="profile-form">
+<div><label for="full-name">Full name</label><input id="full-name" required></div>
+<div><label for="phone">Phone number</label><input id="phone" type="tel" required></div>
+<div><label for="address">Delivery address</label><textarea id="address" rows="4" required></textarea></div>
+<button class="btn" type="submit">Save details</button></form><p id="profile-message" class="account-message" hidden></p></section>
+<section class="account-card"><h2>My Orders</h2><p class="account-muted">Your orders and their current status will appear here.</p><div id="orders"><div class="empty">Loading orders...</div></div></section>
+</div></main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script>
+const sb=window.supabase.createClient(window.ODIWOMMA_SUPABASE_URL,window.ODIWOMMA_SUPABASE_KEY,{auth:{persistSession:true,autoRefreshToken:true}});
+const esc=v=>String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+const money=v=>'₦'+Number(v||0).toLocaleString('en-NG');
+let user;
+async function init(){
+ const {data:{session}}=await sb.auth.getSession(); if(!session){location.href='login.html';return}
+ user=session.user; document.querySelector('#account-email').textContent=user.email||'';
+ const {data:profile}=await sb.from('profiles').select('full_name,phone,delivery_address').eq('id',user.id).maybeSingle();
+ if(profile){document.querySelector('#full-name').value=profile.full_name||'';document.querySelector('#phone').value=profile.phone||'';document.querySelector('#address').value=profile.delivery_address||''}
+ loadOrders();
+}
+async function loadOrders(){
+ const box=document.querySelector('#orders');
+ const {data,error}=await sb.from('orders').select('order_ref,customer_name,items,total,status,payment_status,created_at').eq('customer_id',user.id).order('created_at',{ascending:false});
+ if(error){box.innerHTML='<div class="empty">'+esc(error.message)+'</div>';return}
+ if(!data?.length){box.innerHTML='<div class="empty">You have no orders yet. <a href="shop.html">Visit the Shop</a></div>';return}
+ box.innerHTML=data.map(o=>`<div class="order-card"><div class="order-top"><strong>${esc(o.order_ref)}</strong><span class="badge">${esc(o.status)}</span></div><div class="order-meta">${new Date(o.created_at).toLocaleString()} · Payment: ${esc(o.payment_status)} · ${money(o.total)}</div><div class="order-items">${esc((o.items||[]).map(i=>`${i.name} × ${i.qty}`).join('\\n'))}</div></div>`).join('');
+}
+document.querySelector('#profile-form').addEventListener('submit',async e=>{
+ e.preventDefault();const message=document.querySelector('#profile-message');message.hidden=false;message.textContent='Saving...';
+ const {error}=await sb.from('profiles').upsert({id:user.id,full_name:document.querySelector('#full-name').value.trim(),phone:document.querySelector('#phone').value.trim(),delivery_address:document.querySelector('#address').value.trim(),updated_at:new Date().toISOString()},{onConflict:'id'});
+ message.textContent=error?error.message:'Details saved successfully.';
+});
+document.querySelector('#logout').addEventListener('click',async()=>{await sb.auth.signOut();location.href='login.html'});
+init();
+</script></body></html>
