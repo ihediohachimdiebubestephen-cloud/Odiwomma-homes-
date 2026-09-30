@@ -173,7 +173,7 @@ document.addEventListener("DOMContentLoaded", function(){
   checkoutBackdrop.addEventListener("click", closeCheckout);
   document.querySelector("#success-close").addEventListener("click", closeCheckout);
 
-  checkoutForm.addEventListener("submit", function(e){
+  checkoutForm.addEventListener("submit", async function(e){
     e.preventDefault();
     if(!cart.length){
       alert("Your cart is empty. Add an item first.");
@@ -207,7 +207,19 @@ document.addEventListener("DOMContentLoaded", function(){
       "Please confirm availability, pricing, delivery and payment details. Thank you."
     ].filter(Boolean).join("\n");
 
-    const whatsappUrl = `https://wa.me/2349046193188?text=${encodeURIComponent(message)}`;
+    const orderRef = `ODW-${Date.now().toString().slice(-8)}`;
+    const supabaseReady = window.supabase && window.ODIWOMMA_SUPABASE_URL && window.ODIWOMMA_SUPABASE_KEY && !window.ODIWOMMA_SUPABASE_URL.includes("PASTE_") && !window.ODIWOMMA_SUPABASE_KEY.includes("PASTE_");
+    if (supabaseReady) {
+      try {
+        const client = window.supabase.createClient(window.ODIWOMMA_SUPABASE_URL, window.ODIWOMMA_SUPABASE_KEY);
+        const payload = { order_ref: orderRef, customer_name: name, customer_phone: phone, delivery_address: address, order_note: note || null, items: cart.map(i => { const p = productById(i.id); return { id:p.id, name:p.name, qty:i.qty }; }) };
+        const { error } = await client.from("orders").insert(payload);
+        if (error) console.warn("Order database save failed:", error.message);
+      } catch (err) { console.warn("Order database save failed:", err); }
+    }
+
+    const messageWithRef = [message, `Order reference: ${orderRef}`].join("\n");
+    const whatsappUrl = `https://wa.me/2349046193188?text=${encodeURIComponent(messageWithRef)}`;
 
     checkoutWrap.hidden = true;
     orderSuccess.hidden = false;
