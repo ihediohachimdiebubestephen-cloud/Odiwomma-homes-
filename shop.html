@@ -9,147 +9,67 @@
 <style>
 .checkout-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.5);opacity:0;visibility:hidden;transition:.25s;z-index:100}
 .checkout-modal{position:fixed;z-index:101;top:50%;left:50%;transform:translate(-50%,-46%) scale(.98);width:min(680px,94vw);max-height:92dvh;overflow:auto;background:#fff;box-shadow:0 24px 80px rgba(0,0,0,.28);opacity:0;visibility:hidden;transition:.25s}
-.checkout-open .checkout-backdrop{opacity:1;visibility:visible}
-.checkout-open .checkout-modal{opacity:1;visibility:visible;transform:translate(-50%,-50%) scale(1)}
+.checkout-open .checkout-backdrop{opacity:1;visibility:visible}.checkout-open .checkout-modal{opacity:1;visibility:visible;transform:translate(-50%,-50%) scale(1)}
 .checkout-head{padding:24px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:flex-start}
-.checkout-head h2{margin:4px 0 0}
-.checkout-form{padding:24px}
-.checkout-summary{background:#fafafa;border:1px solid #e7e7e7;padding:16px;margin-bottom:22px}
-.checkout-summary-title{font-weight:700;margin-bottom:8px}
-.checkout-summary-item{display:flex;justify-content:space-between;gap:15px;padding:6px 0;font-size:.9rem;color:#555}
-.checkout-fields{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-.checkout-fields .field.full{grid-column:1/-1}
-.optional{font-weight:400;text-transform:none;letter-spacing:0;color:#777}
-.order-success{padding:50px 28px;text-align:center}
+.checkout-head h2{margin:4px 0 0}.checkout-form{padding:24px}.checkout-summary{background:#fafafa;border:1px solid #e7e7e7;padding:16px;margin-bottom:22px}
+.checkout-summary-title{font-weight:700;margin-bottom:8px}.checkout-summary-item{display:flex;justify-content:space-between;gap:15px;padding:6px 0;font-size:.9rem;color:#555}
+.checkout-fields{display:grid;grid-template-columns:1fr 1fr;gap:18px}.checkout-fields .field.full{grid-column:1/-1}
+.optional{font-weight:400;text-transform:none;letter-spacing:0;color:#777}.order-success{padding:50px 28px;text-align:center}
 .success-mark{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;margin:0 auto 18px;background:#111;color:#fff;font-size:28px}
-.order-success h2{margin:8px 0}
-.order-success p{color:#666;line-height:1.6;max-width:480px;margin:0 auto 22px}
+.order-success h2{margin:8px 0}.order-success p{color:#666;line-height:1.6;max-width:480px;margin:0 auto 22px}
+.account-pill{display:inline-flex;align-items:center;gap:7px;margin-left:8px}
+.account-pill a{font-weight:700}
 @media(max-width:600px){.checkout-fields{grid-template-columns:1fr}.checkout-fields .field.full{grid-column:auto}.checkout-form{padding:18px}.checkout-head{padding:20px}.checkout-modal{max-height:95dvh}}
 </style>
 </head>
 <body>
-
 <div class="topbar"><div class="container"><span>OdiwommaHome</span><span>Painting · Finishing · Home Improvement</span></div></div>
 <header class="site-header">
-  <div class="container nav">
-    <a href="index.html" aria-label="OdiwommaHome home"><img class="logo" src="logo.jpg" alt="OdiwommaHome logo"></a>
-    <button class="menu" aria-label="Open navigation" aria-expanded="false">Menu</button>
-    <nav class="nav-links" aria-label="Main navigation">
-      <a href="index.html">Home</a><a href="projects.html">Projects</a><a href="services.html">Services</a><a href="finishes.html">Finishes</a><a href="about.html">About</a><a href="contact.html">Contact</a><a href="shop.html" class="active">Shop</a>
-      <button class="cart-nav" type="button" data-open-cart>Cart <span class="cart-count">0</span></button>
-      <a class="nav-cta" href="contact.html">Start a Project</a>
-    </nav>
-  </div>
-</header>
-
+<div class="container nav">
+<a href="index.html" aria-label="OdiwommaHome home"><img class="logo" src="logo.jpg" alt="OdiwommaHome logo"></a>
+<button class="menu" aria-label="Open navigation" aria-expanded="false">Menu</button>
+<nav class="nav-links" aria-label="Main navigation">
+<a href="index.html">Home</a><a href="projects.html">Projects</a><a href="services.html">Services</a><a href="finishes.html">Finishes</a><a href="about.html">About</a><a href="contact.html">Contact</a><a href="shop.html" class="active">Shop</a>
+<a href="login.html" id="account-link">Login</a>
+<button class="cart-nav" type="button" data-open-cart>Cart <span class="cart-count">0</span></button>
+<a class="nav-cta" href="contact.html">Start a Project</a>
+</nav></div></header>
 <main>
 <section class="page-hero"><div class="container"><div class="eyebrow">OdiwommaHome Shop</div><h1>Choose what you need for<br><em>your next project.</em></h1><p>Browse our product catalogue, add what you need to your cart, then send your order or quote request directly to WhatsApp.</p></div></section>
-
-<section class="section shop-section">
-  <div class="container">
-    <div class="shop-toolbar">
-      <div>
-        <div class="eyebrow">Catalogue</div>
-        <h2>Shop OdiwommaHome</h2>
-      </div>
-      <div class="shop-actions">
-        <label class="sr-only" for="shop-search">Search products</label>
-        <input id="shop-search" class="shop-search" type="search" placeholder="Search products...">
-        <select id="shop-category" class="shop-select" aria-label="Filter products">
-          <option value="all">All categories</option>
-          <option value="painting">Paints</option>
-          <option value="finishes">Decorative finishes</option>
-          <option value="materials">Preparation & materials</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="shop-note"><strong>Ordering:</strong> Prices can be confirmed before payment. Add your items, review your cart, then send your order or quote request to OdiwommaHome on WhatsApp.</div>
-
-    <div id="product-grid" class="product-grid" aria-live="polite"></div>
-    <div id="empty-products" class="empty-products" hidden>No products match your search.</div>
-  </div>
-</section>
-
+<section class="section shop-section"><div class="container">
+<div class="shop-toolbar"><div><div class="eyebrow">Catalogue</div><h2>Shop OdiwommaHome</h2></div>
+<div class="shop-actions"><label class="sr-only" for="shop-search">Search products</label><input id="shop-search" class="shop-search" type="search" placeholder="Search products...">
+<select id="shop-category" class="shop-select" aria-label="Filter products"><option value="all">All categories</option><option value="painting">Paints</option><option value="finishes">Decorative finishes</option><option value="materials">Preparation & materials</option></select></div></div>
+<div class="shop-note"><strong>Ordering:</strong> Prices are shown in Nigerian Naira (₦). Add your items, review your cart, then send your order to OdiwommaHome on WhatsApp. We will confirm availability and delivery details before payment.</div>
+<div id="product-grid" class="product-grid" aria-live="polite"></div><div id="empty-products" class="empty-products" hidden>No products match your search.</div>
+</div></section>
 <section class="section section-soft"><div class="container"><div class="shop-banner"><div><div class="eyebrow">Need something custom?</div><h2>Tell us what your project needs.</h2><p>For large quantities, colour matching, special finishes or materials not shown here, send us a message and we will prepare a quote.</p></div><a class="btn" href="https://wa.me/2349046193188" target="_blank" rel="noopener">Chat on WhatsApp</a></div></div></section>
 </main>
-
 <div class="cart-backdrop" data-close-cart></div>
 <aside class="cart-drawer" aria-label="Shopping cart" aria-hidden="true">
-  <div class="cart-head"><div><div class="eyebrow">Your order</div><h2>Cart</h2></div><button class="cart-close" type="button" data-close-cart aria-label="Close cart">×</button></div>
-  <div id="cart-items" class="cart-items"></div>
-  <div id="cart-empty" class="cart-empty">Your cart is empty. Add something from the catalogue.</div>
-  <div class="cart-foot">
-    <div class="cart-total-row"><span>Items</span><strong id="cart-total-items">0</strong></div>
-    <div class="cart-total-row"><span>Total</span><strong id="cart-total">Price on request</strong></div>
-    <button class="btn btn-full" id="checkout-order" type="button">Continue to checkout</button>
-    <button class="btn btn-light btn-full" id="clear-cart" type="button">Clear cart</button>
-    <p class="cart-help">Prices are confirmed before payment. Your order will be prepared for WhatsApp after you enter your details.</p>
-  </div>
-</aside>
-
+<div class="cart-head"><div><div class="eyebrow">Your order</div><h2>Cart</h2></div><button class="cart-close" type="button" data-close-cart aria-label="Close cart">×</button></div>
+<div id="cart-items" class="cart-items"></div><div id="cart-empty" class="cart-empty">Your cart is empty. Add something from the catalogue.</div>
+<div class="cart-foot"><div class="cart-total-row"><span>Items</span><strong id="cart-total-items">0</strong></div><div class="cart-total-row"><span>Total</span><strong id="cart-total">Price on request</strong></div>
+<button class="btn btn-full" id="checkout-order" type="button">Continue to checkout</button><button class="btn btn-light btn-full" id="clear-cart" type="button">Clear cart</button>
+<p class="cart-help">Prices are shown in Nigerian Naira (₦). Your order total will be included in the WhatsApp message. Payment is handled after availability and delivery details are confirmed.</p></div></aside>
 <div class="checkout-backdrop" id="checkout-backdrop"></div>
 <section class="checkout-modal" id="checkout-modal" aria-hidden="true" aria-labelledby="checkout-title">
-  <div class="checkout-head">
-    <div>
-      <div class="eyebrow">Order details</div>
-      <h2 id="checkout-title">Checkout</h2>
-    </div>
-    <button class="cart-close" id="checkout-close" type="button" aria-label="Close checkout">×</button>
-  </div>
-
-  <div id="checkout-form-wrap">
-    <form id="checkout-form" class="checkout-form">
-      <div class="checkout-summary" id="checkout-summary"></div>
-
-      <div class="checkout-fields">
-        <div class="field">
-          <label for="customer-name">Full name</label>
-          <input id="customer-name" name="name" type="text" autocomplete="name" required placeholder="Your full name">
-        </div>
-        <div class="field">
-          <label for="customer-phone">Phone number</label>
-          <input id="customer-phone" name="phone" type="tel" autocomplete="tel" required placeholder="0800 000 0000">
-        </div>
-        <div class="field full">
-          <label for="customer-address">Delivery address</label>
-          <textarea id="customer-address" name="address" autocomplete="street-address" required placeholder="Where should we deliver?"></textarea>
-        </div>
-        <div class="field full">
-          <label for="customer-note">Order note <span class="optional">(optional)</span></label>
-          <textarea id="customer-note" name="note" placeholder="Colour preference, quantity details or anything else we should know."></textarea>
-        </div>
-      </div>
-
-      <button class="btn btn-full" type="submit">Send order to WhatsApp</button>
-      <p class="cart-help">WhatsApp will open with your name, phone number, address and selected products. We will confirm pricing, availability, delivery and payment with you.</p>
-    </form>
-  </div>
-
-  <div class="order-success" id="order-success" hidden>
-    <div class="success-mark">✓</div>
-    <div class="eyebrow">Order prepared</div>
-    <h2>Your order is ready.</h2>
-    <p>WhatsApp should open with your order details. Send the message to OdiwommaHome to complete your request.</p>
-    <button class="btn btn-full" id="success-close" type="button">Back to shop</button>
-  </div>
+<div class="checkout-head"><div><div class="eyebrow">Order details</div><h2 id="checkout-title">Checkout</h2></div><button class="cart-close" id="checkout-close" type="button" aria-label="Close checkout">×</button></div>
+<div id="checkout-form-wrap"><form id="checkout-form" class="checkout-form"><div class="checkout-summary" id="checkout-summary"></div>
+<div class="checkout-fields"><div class="field"><label for="customer-name">Full name</label><input id="customer-name" name="name" type="text" autocomplete="name" required placeholder="Your full name"></div>
+<div class="field"><label for="customer-phone">Phone number</label><input id="customer-phone" name="phone" type="tel" autocomplete="tel" required placeholder="0800 000 0000"></div>
+<div class="field full"><label for="customer-address">Delivery address</label><textarea id="customer-address" name="address" autocomplete="street-address" required placeholder="Where should we deliver?"></textarea></div>
+<div class="field full"><label for="customer-note">Order note <span class="optional">(optional)</span></label><textarea id="customer-note" name="note" placeholder="Colour preference, quantity details or anything else we should know."></textarea></div></div>
+<button class="btn btn-full" type="submit">Send order to WhatsApp</button>
+<p class="cart-help">WhatsApp will open with your name, phone number, address, selected products and order total. We will confirm availability, delivery and payment with you.</p></form></div>
+<div class="order-success" id="order-success" hidden><div class="success-mark">✓</div><div class="eyebrow">Order prepared</div><h2>Your order is ready.</h2><p>WhatsApp should open with your order details. Your order is also linked to your customer account when you are signed in.</p><button class="btn btn-full" id="success-close" type="button">Back to shop</button></div>
 </section>
-</aside>
-
-<footer>
-  <div class="container">
-    <div class="footer-grid">
-      <div><img class="footer-logo" src="logo.jpg" alt="OdiwommaHome logo"><p>Professional painting, decorative finishes and practical home improvement for spaces that feel considered and complete.</p></div>
-      <div><div class="footer-title">Explore</div><div class="footer-links"><a href="projects.html">Projects</a><a href="services.html">Services</a><a href="finishes.html">Finishes</a></div></div>
-      <div><div class="footer-title">Company</div><div class="footer-links"><a href="about.html">About</a><a href="contact.html">Contact</a><a href="shop.html">Shop</a></div></div>
-      <div><div class="footer-title">Contact</div><div class="footer-links"><a href="https://wa.me/2349046193188" target="_blank" rel="noopener">WhatsApp: 0904 619 3188</a><span>Owerri, Imo State</span><span>Serving clients nationwide</span></div></div>
-    </div>
-    <div class="footer-bottom"><span>© 2026 OdiwommaHome</span><span>Transforming spaces. Creating beautiful identities.</span></div>
-  </div>
-</footer>
+<footer><div class="container"><div class="footer-grid">
+<div><img class="footer-logo" src="logo.jpg" alt="OdiwommaHome logo"><p>Professional painting, decorative finishes and practical home improvement for spaces that feel considered and complete.</p></div>
+<div><div class="footer-title">Explore</div><div class="footer-links"><a href="projects.html">Projects</a><a href="services.html">Services</a><a href="finishes.html">Finishes</a></div></div>
+<div><div class="footer-title">Company</div><div class="footer-links"><a href="about.html">About</a><a href="contact.html">Contact</a><a href="shop.html">Shop</a></div></div>
+<div><div class="footer-title">Contact</div><div class="footer-links"><a href="https://wa.me/2349046193188" target="_blank" rel="noopener">WhatsApp: 0904 619 3188</a><span>Owerri, Imo State</span><span>Serving clients nationwide</span></div></div>
+</div><div class="footer-bottom"><span>© 2026 OdiwommaHome</span><span>Transforming spaces. Creating beautiful identities.</span></div></div></footer>
 <a class="whatsapp" href="https://wa.me/2349046193188" target="_blank" rel="noopener">WhatsApp</a>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="supabase-config.js"></script>
-<script src="script.js"></script>
-</body>
-</html>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script><script src="product-prices.js"></script><script src="script.js"></script>
+</body></html>
