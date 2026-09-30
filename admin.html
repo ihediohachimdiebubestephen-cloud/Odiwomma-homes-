@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin | OdiwommaHome</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+.admin-wrap{padding:42px 0 70px}.admin-head{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:28px}.admin-head h1{margin:.2rem 0}.admin-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px}.admin-stat{background:#fff;border:1px solid #e8e8e8;padding:20px}.admin-stat strong{display:block;font-size:1.8rem;margin-top:5px}.admin-card{background:#fff;border:1px solid #e8e8e8;padding:20px}.admin-table-wrap{overflow:auto}.admin-table{width:100%;border-collapse:collapse;min-width:850px}.admin-table th,.admin-table td{text-align:left;padding:13px 10px;border-bottom:1px solid #eee;vertical-align:top}.admin-table th{font-size:.78rem;text-transform:uppercase;letter-spacing:.08em}.admin-status{padding:6px 9px;border:1px solid #ddd;background:#fafafa}.admin-actions{display:flex;gap:8px;flex-wrap:wrap}.admin-login{max-width:440px;margin:70px auto}.admin-login form{display:grid;gap:14px}.admin-error{color:#a33;margin-top:10px}.admin-muted{color:#777}.admin-items{white-space:pre-line;font-size:.9rem}.admin-top-actions{display:flex;gap:10px;align-items:center}.hidden{display:none!important}@media(max-width:800px){.admin-grid{grid-template-columns:1fr 1fr}.admin-head{align-items:start;flex-direction:column}}@media(max-width:500px){.admin-grid{grid-template-columns:1fr}.admin-wrap{padding-top:25px}}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+</head>
+<body>
+<div class="topbar"><div class="container"><span>OdiwommaHome Admin</span><span>Private order management</span></div></div>
+<header class="site-header"><div class="container nav"><a href="index.html"><img class="logo" src="logo.jpg" alt="OdiwommaHome logo"></a><nav class="nav-links"><a href="index.html">Website</a><a href="shop.html">Shop</a><button class="btn btn-light" id="logout">Log out</button></nav></div></header>
+<main class="admin-wrap container">
+<section id="login-panel" class="admin-card admin-login">
+  <div class="eyebrow">Private area</div><h1>Admin login</h1><p class="admin-muted">Sign in with the admin email and password you created in Supabase.</p>
+  <form id="login-form"><input id="login-email" type="email" required placeholder="Admin email"><input id="login-password" type="password" required placeholder="Password"><button class="btn" type="submit">Sign in</button></form>
+  <p id="login-error" class="admin-error"></p>
+</section>
+<section id="dashboard" class="hidden">
+  <div class="admin-head"><div><div class="eyebrow">Dashboard</div><h1>Orders</h1><p class="admin-muted">View incoming orders and update their status.</p></div><div class="admin-top-actions"><button class="btn btn-light" id="refresh">Refresh</button><button class="btn btn-light" id="logout2">Log out</button></div></div>
+  <div class="admin-grid"><div class="admin-stat"><span>All orders</span><strong id="stat-all">0</strong></div><div class="admin-stat"><span>New</span><strong id="stat-new">0</strong></div><div class="admin-stat"><span>Processing</span><strong id="stat-processing">0</strong></div><div class="admin-stat"><span>Delivered</span><strong id="stat-delivered">0</strong></div></div>
+  <div class="admin-card"><div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>Order</th><th>Customer</th><th>Items</th><th>Status</th><th>Payment</th><th>Date</th><th>Actions</th></tr></thead><tbody id="orders-body"></tbody></table></div><p id="orders-message" class="admin-muted"></p></div>
+</section>
+</main>
+<script>
+const url=window.ODIWOMMA_SUPABASE_URL,key=window.ODIWOMMA_SUPABASE_KEY;
+const configured=url && key && !url.includes('PASTE_') && !key.includes('PASTE_');
+let supabaseClient=null;
+if(configured) supabaseClient=window.supabase.createClient(url,key,{auth:{persistSession:true,autoRefreshToken:true}});
+const loginPanel=document.querySelector('#login-panel'),dashboard=document.querySelector('#dashboard'),loginError=document.querySelector('#login-error');
+function showError(m){loginError.textContent=m||''}
+function fmtDate(s){return new Date(s).toLocaleString()}
+function setVisible(logged){loginPanel.classList.toggle('hidden',logged);dashboard.classList.toggle('hidden',!logged)}
+async function loadOrders(){
+  const {data,error}=await supabaseClient.from('orders').select('*').order('created_at',{ascending:false});
+  if(error){document.querySelector('#orders-message').textContent=error.message;return}
+  document.querySelector('#orders-message').textContent=data.length?'':'No orders yet.';
+  const counts={all:data.length,new:0,processing:0,delivered:0}; data.forEach(o=>{if(counts[o.status]!==undefined) counts[o.status]++});
+  ['all','new','processing','delivered'].forEach(k=>document.querySelector('#stat-'+k).textContent=counts[k]);
+  document.querySelector('#orders-body').innerHTML=data.map(o=>{
+    const items=(o.items||[]).map(i=>`${i.name} x${i.qty}`).join('\n');
+    return `<tr><td><strong>${o.order_ref}</strong></td><td><strong>${esc(o.customer_name)}</strong><br>${esc(o.customer_phone)}<br><span class="admin-muted">${esc(o.delivery_address)}</span>${o.order_note?`<br><span class="admin-muted">Note: ${esc(o.order_note)}</span>`:''}</td><td class="admin-items">${esc(items)}</td><td><select class="admin-status" data-status="${o.id}"><option ${o.status==='new'?'selected':''} value="new">New</option><option ${o.status==='confirmed'?'selected':''} value="confirmed">Confirmed</option><option ${o.status==='processing'?'selected':''} value="processing">Processing</option><option ${o.status==='delivered'?'selected':''} value="delivered">Delivered</option><option ${o.status==='cancelled'?'selected':''} value="cancelled">Cancelled</option></select></td><td><select class="admin-status" data-payment="${o.id}"><option ${o.payment_status==='unpaid'?'selected':''} value="unpaid">Unpaid</option><option ${o.payment_status==='pending'?'selected':''} value="pending">Pending</option><option ${o.payment_status==='paid'?'selected':''} value="paid">Paid</option><option ${o.payment_status==='failed'?'selected':''} value="failed">Failed</option></select></td><td>${fmtDate(o.created_at)}</td><td><div class="admin-actions"><a class="btn btn-light" target="_blank" href="https://wa.me/${esc(o.customer_phone).replace(/\D/g,'')}">WhatsApp</a></div></td></tr>`;
+  }).join('');
+  document.querySelectorAll('[data-status]').forEach(el=>el.onchange=async()=>{const {error}=await supabaseClient.from('orders').update({status:el.value}).eq('id',el.dataset.status);if(error)alert(error.message);else loadOrders()});
+  document.querySelectorAll('[data-payment]').forEach(el=>el.onchange=async()=>{const {error}=await supabaseClient.from('orders').update({payment_status:el.value}).eq('id',el.dataset.payment);if(error)alert(error.message);else loadOrders()});
+}
+function esc(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+async function check(){if(!configured){setVisible(false);showError('Admin is not connected yet. Complete the Supabase setup first.');return}const {data:{session}}=await supabaseClient.auth.getSession();if(session){setVisible(true);loadOrders()}else setVisible(false)}
+if(configured){supabaseClient.auth.onAuthStateChange((_e,session)=>{setVisible(!!session);if(session)loadOrders()})}
+document.querySelector('#login-form').onsubmit=async e=>{e.preventDefault();if(!configured)return showError('Supabase is not configured yet.');showError('');const {error}=await supabaseClient.auth.signInWithPassword({email:document.querySelector('#login-email').value,password:document.querySelector('#login-password').value});if(error)showError(error.message)};
+async function logout(){if(supabaseClient)await supabaseClient.auth.signOut();setVisible(false)}
+document.querySelector('#logout').onclick=logout;document.querySelector('#logout2').onclick=logout;document.querySelector('#refresh').onclick=loadOrders;check();
+</script>
+</body></html>
