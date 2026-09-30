@@ -211,10 +211,10 @@ document.addEventListener("DOMContentLoaded", function(){
     const supabaseReady = window.supabase && window.ODIWOMMA_SUPABASE_URL && window.ODIWOMMA_SUPABASE_KEY && !window.ODIWOMMA_SUPABASE_URL.includes("PASTE_") && !window.ODIWOMMA_SUPABASE_KEY.includes("PASTE_");
     if (supabaseReady) {
       try {
-        const client = window.supabase.createClient(window.ODIWOMMA_SUPABASE_URL, window.ODIWOMMA_SUPABASE_KEY);
+        const client = window.supabase.createClient(window.ODIWOMMA_SUPABASE_URL, window.ODIWOMMA_SUPABASE_KEY, { auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false } });
         const payload = { order_ref: orderRef, customer_name: name, customer_phone: phone, delivery_address: address, order_note: note || null, items: cart.map(i => { const p = productById(i.id); return { id:p.id, name:p.name, qty:i.qty }; }) };
         const { error } = await client.from("orders").insert(payload);
-        if (error) console.warn("Order database save failed:", error.message);
+        if (error) { console.error("Order database save failed:", error); alert("The order could not be saved to the OdiwommaHome order system. WhatsApp can still open, but please tell the admin this message: " + error.message); }
       } catch (err) { console.warn("Order database save failed:", err); }
     }
 
