@@ -1,45 +1,113 @@
 <!doctype html>
-<html lang="en"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Create Account | OdiwommaHome</title><link rel="stylesheet" href="styles.css">
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Create your OdiwommaHome customer account.">
+<title>Create Account | OdiwommaHome</title>
+<link rel="stylesheet" href="styles.css">
 <style>
-.account-wrap{max-width:560px;margin:50px auto 80px;padding:0 18px}.account-card{background:#fff;border:1px solid #e8e8e8;border-radius:6px;padding:28px}.account-card form{display:grid;gap:14px}.account-card input,.account-card textarea{width:100%;padding:13px;border:1px solid #ddd;border-radius:4px;box-sizing:border-box}.account-card label{font-size:.82rem;font-weight:700}.account-muted{color:#777;line-height:1.6}.account-message{margin-top:14px;padding:12px;background:#f6f6f6;border-radius:4px;line-height:1.5}.account-error{color:#a33}.account-links{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:18px}
-</style></head><body>
+.account-page{padding:70px 0 90px;background:#f7f5ef;min-height:70vh}
+.account-card{width:min(560px,92vw);margin:0 auto;background:#fff;padding:34px;box-shadow:0 12px 40px rgba(0,0,0,.08)}
+.account-logo{display:block;width:92px;height:auto;margin:0 auto 20px}
+.account-card h1{text-align:center;margin:0 0 10px}
+.account-card>p{text-align:center;color:#666;line-height:1.6;margin:0 0 28px}
+.account-form{display:grid;gap:18px}
+.account-form label{display:block;font-weight:700;margin-bottom:7px}
+.account-form input,.account-form textarea{width:100%;box-sizing:border-box;padding:14px;border:1px solid #ddd;background:#fff;font:inherit}
+.account-form textarea{min-height:110px;resize:vertical}
+.account-form button{border:0;cursor:pointer}
+.form-message{padding:13px 15px;background:#f7f7f7;line-height:1.5}
+.form-message.error{color:#a33;background:#fff1f1}
+.form-message.success{color:#245b35;background:#eff9f1}
+.account-links{text-align:center;margin-top:22px;line-height:2}
+.account-links a{font-weight:700}
+</style>
+</head>
+<body>
 <div class="topbar"><div class="container"><span>OdiwommaHome</span><span>Painting · Finishing · Home Improvement</span></div></div>
-<header class="site-header"><div class="container nav">
-<a href="index.html"><img class="logo" src="logo.jpg" alt="OdiwommaHome logo"></a>
-<nav class="nav-links"><a href="index.html">Home</a><a href="shop.html">Shop</a><a href="contact.html">Contact</a></nav>
-</div></header>
-<main class="account-wrap"><section class="account-card">
-<div class="eyebrow">Customer account</div><h1>Create your account.</h1>
-<p class="account-muted">Save your details once, then use your account for future orders and order tracking.</p>
-<form id="register-form">
-<div><label for="full-name">Full name</label><input id="full-name" autocomplete="name" required></div>
-<div><label for="phone">Phone number</label><input id="phone" type="tel" autocomplete="tel" required></div>
-<div><label for="address">Delivery address</label><textarea id="address" autocomplete="street-address" rows="3" required></textarea></div>
-<div><label for="email">Email</label><input id="email" type="email" autocomplete="email" required></div>
-<div><label for="password">Password</label><input id="password" type="password" autocomplete="new-password" minlength="6" required></div>
-<button class="btn btn-full" type="submit">Create account</button>
+<header class="site-header">
+<div class="container nav">
+<a href="index.html" aria-label="OdiwommaHome home"><img class="logo" src="logo.jpg" alt="OdiwommaHome logo"></a>
+<button class="menu" aria-label="Open navigation" aria-expanded="false">Menu</button>
+<nav class="nav-links" aria-label="Main navigation">
+<a href="index.html">Home</a><a href="projects.html">Projects</a><a href="services.html">Services</a><a href="finishes.html">Finishes</a><a href="about.html">About</a><a href="contact.html">Contact</a><a href="shop.html">Shop</a><a href="login.html">Login</a>
+</nav></div></header>
+<main class="account-page">
+<div class="account-card">
+<img class="account-logo" src="logo.jpg" alt="OdiwommaHome logo">
+<div class="eyebrow" style="text-align:center">Customer account</div>
+<h1>Create your account</h1>
+<p>Create an account to save your delivery details and keep track of your orders on OdiwommaHome.</p>
+<form id="register-form" class="account-form">
+<div><label for="full-name">Full name</label><input id="full-name" type="text" autocomplete="name" required placeholder="Your full name"></div>
+<div><label for="phone">Phone number</label><input id="phone" type="tel" autocomplete="tel" required placeholder="0800 000 0000"></div>
+<div><label for="address">Delivery address</label><textarea id="address" autocomplete="street-address" required placeholder="Your delivery address"></textarea></div>
+<div><label for="email">Email</label><input id="email" type="email" autocomplete="email" required placeholder="you@example.com"></div>
+<div><label for="password">Password</label><input id="password" type="password" autocomplete="new-password" minlength="6" required placeholder="At least 6 characters"></div>
+<button class="btn btn-full" type="submit" id="register-button">Create Account</button>
+<div id="register-message" class="form-message" hidden></div>
 </form>
-<p id="message" class="account-message" hidden></p>
-<div class="account-links"><a href="login.html">Already have an account? Log in</a><a href="shop.html">Back to Shop</a></div>
-</section></main>
+<div class="account-links">Already have an account? <a href="login.html">Log in</a><br><a href="shop.html">Back to Shop</a></div>
+</div>
+</main>
+<footer><div class="container"><div class="footer-grid">
+<div><img class="footer-logo" src="logo.jpg" alt="OdiwommaHome logo"><p>Professional painting, decorative finishes and practical home improvement for spaces that feel considered and complete.</p></div>
+<div><div class="footer-title">Explore</div><div class="footer-links"><a href="projects.html">Projects</a><a href="services.html">Services</a><a href="finishes.html">Finishes</a></div></div>
+<div><div class="footer-title">Company</div><div class="footer-links"><a href="about.html">About</a><a href="contact.html">Contact</a><a href="shop.html">Shop</a></div></div>
+<div><div class="footer-title">Contact</div><div class="footer-links"><a href="https://wa.me/2349046193188" target="_blank" rel="noopener">WhatsApp: 0904 619 3188</a><span>Owerri, Imo State</span><span>Serving clients nationwide</span></div></div>
+</div><div class="footer-bottom"><span>© 2026 OdiwommaHome</span><span>Transforming spaces. Creating beautiful identities.</span></div></div></footer>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase-config.js"></script>
 <script>
-const sb=window.supabase.createClient(window.ODIWOMMA_SUPABASE_URL,window.ODIWOMMA_SUPABASE_KEY,{auth:{persistSession:true,autoRefreshToken:true}});
-const form=document.querySelector('#register-form'),msg=document.querySelector('#message');
-function show(t,error=false){msg.hidden=false;msg.textContent=t;msg.className='account-message'+(error?' account-error':'')}
-form.addEventListener('submit',async e=>{
- e.preventDefault();show('Creating your account...');
- const values={full_name:document.querySelector('#full-name').value.trim(),phone:document.querySelector('#phone').value.trim(),delivery_address:document.querySelector('#address').value.trim()};
- const {data,error}=await sb.auth.signUp({email:email.value.trim(),password:password.value,options:{data:{full_name:values.full_name,phone:values.phone}}});
- if(error){show(error.message,true);return}
- if(data.user){
-   const {error:profileError}=await sb.from('profiles').upsert({id:data.user.id,...values},{onConflict:'id'});
-   if(profileError){show(profileError.message,true);return}
- }
- if(data.session){location.href='account.html';}
- else show('Account created. Please check your email if email confirmation is enabled, then log in.');
+document.addEventListener("DOMContentLoaded", async function(){
+  const form=document.querySelector("#register-form");
+  const button=document.querySelector("#register-button");
+  const message=document.querySelector("#register-message");
+  function showMessage(text,type){
+    message.hidden=false;
+    message.className="form-message "+(type||"");
+    message.textContent=text;
+  }
+  const sb=window.supabase.createClient(window.ODIWOMMA_SUPABASE_URL,window.ODIWOMMA_SUPABASE_KEY);
+  const {data:{session}}=await sb.auth.getSession();
+  if(session){window.location.href="account.html";return;}
+  form.addEventListener("submit",async function(e){
+    e.preventDefault();
+    message.hidden=true;
+    button.disabled=true;
+    button.textContent="Creating account...";
+    const fullName=document.querySelector("#full-name").value.trim();
+    const phone=document.querySelector("#phone").value.trim();
+    const address=document.querySelector("#address").value.trim();
+    const email=document.querySelector("#email").value.trim();
+    const password=document.querySelector("#password").value;
+    try{
+      const {data,error}=await sb.auth.signUp({
+        email,password,
+        options:{data:{full_name:fullName,phone:phone,delivery_address:address}}
+      });
+      if(error) throw error;
+      if(data.session){
+        showMessage("Account created successfully. Opening your account...","success");
+        setTimeout(()=>window.location.href="account.html",500);
+      }else{
+        showMessage("Account created. Please check your email and confirm your account, then log in. Your customer profile has been saved automatically.","success");
+        form.reset();
+      }
+    }catch(error){
+      console.error("Registration error:",error);
+      let text=error?.message||"Could not create the account.";
+      if(text.toLowerCase().includes("already registered") || text.toLowerCase().includes("already exists")){
+        text="An account with this email already exists. Please use Log in instead.";
+      }
+      showMessage(text,"error");
+    }finally{
+      button.disabled=false;
+      button.textContent="Create Account";
+    }
+  });
 });
-</script></body></html>
+</script>
+</body>
+</html>
