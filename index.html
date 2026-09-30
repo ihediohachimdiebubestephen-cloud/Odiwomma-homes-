@@ -180,20 +180,56 @@
       status.textContent = "Video selected: " + selectedFile.name;
     });
 
-    sendButton.addEventListener("click", function () {
+    sendButton.addEventListener("click", async function () {
       if (!selectedFile) return;
 
       const message =
-        "Hello OdiwommaHome, I would like to send a video of my space for advice. " +
-        "I have selected a video and will attach it here.";
+        "Hello OdiwommaHome, I would like to send a video of my space for advice.";
 
-      const whatsappUrl =
-        "https://wa.me/2349046193188?text=" +
-        encodeURIComponent(message);
+      try {
+        if (
+          navigator.share &&
+          navigator.canShare &&
+          navigator.canShare({ files: [selectedFile] })
+        ) {
+          await navigator.share({
+            files: [selectedFile],
+            text: message,
+            title: "OdiwommaHome Space Video"
+          });
 
-      window.location.href = whatsappUrl;
-      status.textContent =
-        "WhatsApp is opening. Attach your selected video and send it to OdiwommaHome.";
+          status.textContent =
+            "Choose WhatsApp in the share options to send your video.";
+          return;
+        }
+
+        const whatsappUrl =
+          "https://wa.me/2349046193188?text=" +
+          encodeURIComponent(
+            message +
+            " Please attach the video I selected before sending."
+          );
+
+        window.location.href = whatsappUrl;
+        status.textContent =
+          "WhatsApp opened. Attach your selected video and send it.";
+      } catch (error) {
+        if (error && error.name === "AbortError") {
+          status.textContent = "Sharing cancelled. Your video is still selected.";
+          return;
+        }
+
+        const whatsappUrl =
+          "https://wa.me/2349046193188?text=" +
+          encodeURIComponent(
+            message +
+            " Please attach the video I selected before sending."
+          );
+
+        window.location.href = whatsappUrl;
+        status.textContent =
+          "WhatsApp opened. Attach your selected video and send it.";
+      }
     });
 
   })();
