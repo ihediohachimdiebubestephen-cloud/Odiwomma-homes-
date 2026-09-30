@@ -180,36 +180,22 @@
       status.textContent = "Video selected: " + selectedFile.name;
     });
 
-    sendButton.addEventListener("click", async function () {
+    sendButton.addEventListener("click", function () {
       if (!selectedFile) return;
 
-      const shareData = {
-        files: [selectedFile],
-        text: "Hello OdiwommaHome, I would like to send a video of my space for advice."
-      };
+      const message =
+        "Hello OdiwommaHome, I would like to send a video of my space for advice. " +
+        "I have selected a video and will attach it here.";
 
-      try {
-        if (
-          navigator.share &&
-          navigator.canShare &&
-          navigator.canShare({ files: [selectedFile] })
-        ) {
-          await navigator.share(shareData);
-          status.textContent = "Share sheet opened. Choose WhatsApp to send the video.";
-        } else {
-          window.open(whatsappUrl, "_blank", "noopener");
-          status.textContent = "WhatsApp opened. Attach the selected video and send it.";
-        }
-      } catch (error) {
-        if (error && error.name === "AbortError") {
-          status.textContent = "Sharing cancelled. Your video is still selected.";
-          return;
-        }
+      const whatsappUrl =
+        "https://wa.me/2349046193188?text=" +
+        encodeURIComponent(message);
 
-        window.open(whatsappUrl, "_blank", "noopener");
-        status.textContent = "WhatsApp opened. Attach the selected video and send it.";
-      }
+      window.location.href = whatsappUrl;
+      status.textContent =
+        "WhatsApp is opening. Attach your selected video and send it to OdiwommaHome.";
     });
+
   })();
 </script>
 <script src="script.js"></script>
