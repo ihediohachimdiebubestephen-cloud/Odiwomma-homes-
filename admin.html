@@ -1,39 +1,204 @@
-<!doctype html><html lang="en"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Admin | OdiwommaHome</title><link rel="stylesheet" href="styles.css">
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin | OdiwommaHome</title>
+<link rel="stylesheet" href="styles.css">
 <style>
-.admin-wrap{padding:32px 0 70px}.admin-head{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:24px}.admin-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}.admin-stat,.admin-card{background:#fff;border:1px solid #e8e8e8;padding:18px;border-radius:4px}.admin-stat strong{display:block;font-size:1.8rem;margin-top:5px}.admin-login{max-width:440px;margin:60px auto}.admin-login form{display:grid;gap:14px}.admin-error{color:#a33}.admin-muted{color:#777}.admin-top-actions,.admin-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.admin-filters{display:grid;grid-template-columns:2fr 1fr 1fr auto;gap:10px;margin-bottom:14px}.admin-filters input,.admin-filters select{width:100%;padding:11px;border:1px solid #ddd;border-radius:4px;background:#fff}.admin-table-wrap{overflow:auto}.admin-table{width:100%;border-collapse:collapse;min-width:980px}.admin-table th,.admin-table td{text-align:left;padding:12px 10px;border-bottom:1px solid #eee;vertical-align:top}.admin-table th{font-size:.76rem;text-transform:uppercase;letter-spacing:.07em}.admin-status{padding:7px 9px;border:1px solid #ddd;background:#fafafa;border-radius:4px}.admin-items{white-space:pre-line;font-size:.9rem}.admin-detail{margin-top:8px}.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.detail-box{background:#fafafa;border:1px solid #eee;padding:9px}.detail-box strong{display:block;margin-bottom:3px}.hidden{display:none!important}
-@media(max-width:800px){.admin-grid{grid-template-columns:1fr 1fr}.admin-head{align-items:start;flex-direction:column}.admin-filters{grid-template-columns:1fr 1fr}}
-@media(max-width:500px){.admin-grid{grid-template-columns:1fr}.admin-filters{grid-template-columns:1fr}.detail-grid{grid-template-columns:1fr}.admin-wrap{padding-top:22px}}
+body{background:#f7f7f5}.admin-wrap{max-width:1200px;margin:0 auto;padding:34px 18px 70px}
+.admin-head{display:flex;justify-content:space-between;gap:20px;align-items:center;margin-bottom:28px}
+.admin-actions{display:flex;gap:10px;flex-wrap:wrap}
+.admin-card{background:#fff;border:1px solid #e7e7e7;padding:20px;margin-bottom:22px;overflow:auto}
+.admin-card h2{margin:0 0 16px}.admin-login{max-width:440px;margin:60px auto}.admin-login form{display:grid;gap:14px}
+.admin-login input,.product-form input,.product-form select,.product-form textarea,.filter-row input,.filter-row select{width:100%;padding:11px 12px;border:1px solid #d9d9d9;background:#fff}
+.field label{display:block;font-weight:700;margin-bottom:7px}.product-form{display:grid;grid-template-columns:1fr 1fr;gap:14px}.product-form .full{grid-column:1/-1}
+.check-field{display:flex;align-items:center;gap:8px}.check-field input{width:auto}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}.stat{background:#fff;border:1px solid #e7e7e7;padding:16px}.stat strong{display:block;font-size:1.5rem;margin-top:4px}
+.filter-row{display:grid;grid-template-columns:2fr 1fr 1fr auto;gap:10px;margin-bottom:18px}
+.table-wrap{overflow:auto}.admin-table{width:100%;border-collapse:collapse;min-width:900px}.admin-table th,.admin-table td{padding:11px 10px;border-bottom:1px solid #eee;text-align:left;vertical-align:top}.admin-table th{font-size:.8rem;text-transform:uppercase;letter-spacing:.08em}
+.admin-table select,.admin-table input{padding:8px;border:1px solid #ddd;background:#fff}.product-row-actions{display:flex;gap:7px;flex-wrap:wrap}.muted{color:#777;font-size:.9rem}.success-note,.error-note{padding:10px 12px;margin:12px 0;display:none}.success-note{background:#edf8ef}.error-note{background:#fff0f0}
+@media(max-width:800px){.stats{grid-template-columns:1fr 1fr}.filter-row{grid-template-columns:1fr 1fr}.product-form{grid-template-columns:1fr}.product-form .full{grid-column:auto}.admin-head{align-items:flex-start;flex-direction:column}}
+@media(max-width:500px){.stats{grid-template-columns:1fr}.filter-row{grid-template-columns:1fr}}
 </style>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script>
-</head><body>
-<div class="topbar"><div class="container"><span>OdiwommaHome Admin</span><span>Private order management</span></div></div>
-<header class="site-header"><div class="container nav"><a href="index.html"><img class="logo" src="logo.jpg" alt="OdiwommaHome logo"></a><nav class="nav-links"><a href="index.html">Website</a><a href="shop.html">Shop</a><button class="btn btn-light" id="logout">Log out</button></nav></div></header>
-<main class="admin-wrap container">
-<section id="login-panel" class="admin-card admin-login"><div class="eyebrow">Private area</div><h1>Admin login</h1><p class="admin-muted">Sign in with your OdiwommaHome admin account.</p><form id="login-form"><input id="login-email" type="email" required placeholder="Admin email"><input id="login-password" type="password" required placeholder="Password"><button class="btn" type="submit">Sign in</button></form><p id="login-error" class="admin-error"></p></section>
-<section id="dashboard" class="hidden">
-<div class="admin-head"><div><div class="eyebrow">Dashboard</div><h1>Orders</h1><p class="admin-muted">Search, filter and manage customer orders.</p></div><div class="admin-top-actions"><button class="btn btn-light" id="refresh">Refresh</button><button class="btn btn-light" id="logout2">Log out</button></div></div>
-<div class="admin-grid"><div class="admin-stat">All orders<strong id="stat-all">0</strong></div><div class="admin-stat">New<strong id="stat-new">0</strong></div><div class="admin-stat">Processing<strong id="stat-processing">0</strong></div><div class="admin-stat">Delivered<strong id="stat-delivered">0</strong></div></div>
-<div class="admin-card"><div class="admin-filters"><input id="order-search" type="search" placeholder="Search order, customer, phone, address"><select id="status-filter"><option value="all">All statuses</option><option value="new">New</option><option value="confirmed">Confirmed</option><option value="processing">Processing</option><option value="delivered">Delivered</option><option value="cancelled">Cancelled</option></select><select id="payment-filter"><option value="all">All payments</option><option value="unpaid">Unpaid</option><option value="pending">Pending</option><option value="paid">Paid</option><option value="failed">Failed</option></select><button class="btn btn-light" id="clear-filters" type="button">Clear</button></div>
-<p id="filter-count" class="admin-muted"></p><div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>Order</th><th>Customer</th><th>Items</th><th>Status</th><th>Payment</th><th>Date</th><th>Actions</th></tr></thead><tbody id="orders-body"></tbody></table></div><p id="orders-message" class="admin-muted"></p></div>
-</section></main>
+</head>
+<body>
+<header class="site-header"><div class="container nav">
+<a href="index.html" aria-label="OdiwommaHome home"><img class="logo" src="logo.jpg" alt="OdiwommaHome logo"></a>
+<nav class="nav-links" style="display:flex;gap:18px;align-items:center">
+<a href="index.html">Website</a><a href="shop.html">Shop</a><button class="btn btn-light" id="logout-btn" type="button">Log out</button>
+</nav></div></header>
+
+<main class="admin-wrap">
+<section id="login-panel" class="admin-card admin-login">
+<div class="eyebrow">OdiwommaHome Admin</div><h1>Admin login</h1>
+<p class="muted">Sign in with the admin account connected to Supabase.</p>
+<form id="login-form"><div class="field"><label for="login-email">Email</label><input id="login-email" type="email" required></div><div class="field"><label for="login-password">Password</label><input id="login-password" type="password" required></div><button class="btn btn-full" type="submit">Sign in</button></form>
+<p id="login-message" class="muted"></p>
+</section>
+
+<section id="dashboard" hidden>
+<div class="admin-head"><div><div class="eyebrow">OdiwommaHome Admin</div><h1>Dashboard</h1><p class="muted">Manage products and orders from one place.</p></div><div class="admin-actions"><button class="btn btn-light" id="refresh-all" type="button">Refresh</button><button class="btn" id="dashboard-logout" type="button">Log out</button></div></div>
+
+<section class="admin-card">
+<h2>Product & Price Management</h2>
+<p class="muted">Edit prices, names, descriptions, categories and active status. Changes saved here appear on the Shop page.</p>
+<div id="product-success" class="success-note"></div><div id="product-error" class="error-note"></div>
+<form id="product-form" class="product-form">
+<div class="field"><label for="product-name">Product name</label><input id="product-name" required></div>
+<div class="field"><label for="product-price">Price (₦)</label><input id="product-price" type="number" min="0" step="1" required></div>
+<div class="field"><label for="product-category">Category</label><select id="product-category"><option value="painting">Paints</option><option value="finishes">Decorative finishes</option><option value="materials">Preparation & materials</option></select></div>
+<div class="field"><label for="product-initial">Card initials</label><input id="product-initial" maxlength="4" placeholder="SP" required></div>
+<div class="field full"><label for="product-desc">Description</label><textarea id="product-desc" rows="3" required></textarea></div>
+<div class="field check-field full"><input id="product-active" type="checkbox" checked><label for="product-active">Active on Shop</label></div>
+<div class="admin-actions full"><button class="btn" type="submit" id="product-save">Add product</button><button class="btn btn-light" type="button" id="product-cancel" hidden>Cancel edit</button></div>
+</form>
+
+<div class="table-wrap" style="margin-top:24px">
+<table class="admin-table"><thead><tr><th>Product</th><th>Category</th><th>Price</th><th>Active</th><th>Actions</th></tr></thead><tbody id="products-body"></tbody></table>
+</div>
+</section>
+
+<section class="stats">
+<div class="stat"><span>All orders</span><strong id="stat-all">0</strong></div><div class="stat"><span>New</span><strong id="stat-new">0</strong></div><div class="stat"><span>Processing</span><strong id="stat-processing">0</strong></div><div class="stat"><span>Delivered</span><strong id="stat-delivered">0</strong></div>
+</section>
+
+<section class="admin-card">
+<h2>Orders</h2>
+<div class="filter-row"><input id="search" placeholder="Search order, customer, phone, address or note"><select id="status-filter"><option value="all">All statuses</option><option value="new">New</option><option value="confirmed">Confirmed</option><option value="processing">Processing</option><option value="delivered">Delivered</option><option value="cancelled">Cancelled</option></select><select id="payment-filter"><option value="all">All payments</option><option value="unpaid">Unpaid</option><option value="pending">Pending</option><option value="paid">Paid</option><option value="failed">Failed</option></select><button class="btn btn-light" id="clear-filters" type="button">Clear</button></div>
+<div class="table-wrap"><table class="admin-table"><thead><tr><th>Order</th><th>Customer</th><th>Items</th><th>Total</th><th>Status</th><th>Payment</th><th>Date</th><th>Action</th></tr></thead><tbody id="orders-body"></tbody></table></div>
+</section>
+</section>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
 <script>
-const url=window.ODIWOMMA_SUPABASE_URL,key=window.ODIWOMMA_SUPABASE_KEY,configured=url&&key&&!url.includes('PASTE_')&&!key.includes('PASTE_');
-let supabaseClient=null,allOrders=[];if(configured)supabaseClient=window.supabase.createClient(url,key,{auth:{persistSession:true,autoRefreshToken:true}});
-const loginPanel=document.querySelector('#login-panel'),dashboard=document.querySelector('#dashboard'),loginError=document.querySelector('#login-error');
-const esc=v=>String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
-const fmtDate=s=>new Date(s).toLocaleString();
-function setVisible(x){loginPanel.classList.toggle('hidden',x);dashboard.classList.toggle('hidden',!x)}
-function updateStats(d){const c={all:d.length,new:0,processing:0,delivered:0};d.forEach(o=>{if(c[o.status]!==undefined)c[o.status]++});['all','new','processing','delivered'].forEach(k=>document.querySelector('#stat-'+k).textContent=c[k])}
-function filtered(){const q=document.querySelector('#order-search').value.trim().toLowerCase(),s=document.querySelector('#status-filter').value,p=document.querySelector('#payment-filter').value;return allOrders.filter(o=>{const h=[o.order_ref,o.customer_name,o.customer_phone,o.delivery_address,o.order_note].join(' ').toLowerCase();return(!q||h.includes(q))&&(s==='all'||o.status===s)&&(p==='all'||o.payment_status===p)})}
-function render(){const d=filtered(),body=document.querySelector('#orders-body');document.querySelector('#filter-count').textContent=`Showing ${d.length} of ${allOrders.length} orders.`;if(!d.length){body.innerHTML='';document.querySelector('#orders-message').textContent=allOrders.length?'No orders match your filters.':'No orders yet.';return}document.querySelector('#orders-message').textContent='';body.innerHTML=d.map(o=>{const items=(o.items||[]).map(i=>`${esc(i.name)} x${esc(i.qty)}`).join('\n'),phone=String(o.customer_phone||'').replace(/\D/g,'');return `<tr><td><strong>${esc(o.order_ref)}</strong><details class="admin-detail"><summary>Full details</summary><div class="detail-grid"><div class="detail-box"><strong>Customer</strong>${esc(o.customer_name)}</div><div class="detail-box"><strong>Phone</strong>${esc(o.customer_phone)}</div><div class="detail-box"><strong>Address</strong>${esc(o.delivery_address)}</div><div class="detail-box"><strong>Note</strong>${esc(o.order_note||'None')}</div></div></details></td><td><strong>${esc(o.customer_name)}</strong><br>${esc(o.customer_phone)}<br><span class="admin-muted">${esc(o.delivery_address)}</span></td><td class="admin-items">${items}</td><td><select class="admin-status" data-status="${o.id}"><option value="new" ${o.status==='new'?'selected':''}>New</option><option value="confirmed" ${o.status==='confirmed'?'selected':''}>Confirmed</option><option value="processing" ${o.status==='processing'?'selected':''}>Processing</option><option value="delivered" ${o.status==='delivered'?'selected':''}>Delivered</option><option value="cancelled" ${o.status==='cancelled'?'selected':''}>Cancelled</option></select></td><td><select class="admin-status" data-payment="${o.id}"><option value="unpaid" ${o.payment_status==='unpaid'?'selected':''}>Unpaid</option><option value="pending" ${o.payment_status==='pending'?'selected':''}>Pending</option><option value="paid" ${o.payment_status==='paid'?'selected':''}>Paid</option><option value="failed" ${o.payment_status==='failed'?'selected':''}>Failed</option></select></td><td>${esc(fmtDate(o.created_at))}</td><td><div class="admin-actions"><a class="btn btn-light" target="_blank" href="https://wa.me/${esc(phone)}">WhatsApp</a></div></td></tr>`}).join('');
-document.querySelectorAll('[data-status]').forEach(el=>el.onchange=async()=>{const{error}=await supabaseClient.from('orders').update({status:el.value}).eq('id',el.dataset.status);if(error)alert(error.message);else loadOrders()});document.querySelectorAll('[data-payment]').forEach(el=>el.onchange=async()=>{const{error}=await supabaseClient.from('orders').update({payment_status:el.value}).eq('id',el.dataset.payment);if(error)alert(error.message);else loadOrders()})}
-async function loadOrders(){const{data,error}=await supabaseClient.from('orders').select('*').order('created_at',{ascending:false});if(error){document.querySelector('#orders-message').textContent=error.message;return}allOrders=data||[];updateStats(allOrders);render()}
-async function check(){if(!configured){setVisible(false);loginError.textContent='Supabase is not configured.';return}const{data:{session}}=await supabaseClient.auth.getSession();if(session){setVisible(true);loadOrders()}else setVisible(false)}
-document.querySelector('#login-form').onsubmit=async e=>{e.preventDefault();loginError.textContent='';const{error}=await supabaseClient.auth.signInWithPassword({email:document.querySelector('#login-email').value,password:document.querySelector('#login-password').value});if(error)loginError.textContent=error.message};
-function logout(){if(supabaseClient)supabaseClient.auth.signOut();setVisible(false)}
-document.querySelector('#refresh').onclick=loadOrders;document.querySelector('#logout').onclick=logout;document.querySelector('#logout2').onclick=logout;
-document.querySelector('#order-search').oninput=render;document.querySelector('#status-filter').onchange=render;document.querySelector('#payment-filter').onchange=render;document.querySelector('#clear-filters').onclick=()=>{document.querySelector('#order-search').value='';document.querySelector('#status-filter').value='all';document.querySelector('#payment-filter').value='all';render()};
-if(configured)supabaseClient.auth.onAuthStateChange((_e,s)=>{setVisible(!!s);if(s)loadOrders()});check();
-</script></body></html>
+const sb=window.supabase.createClient(window.ODIWOMMA_SUPABASE_URL,window.ODIWOMMA_SUPABASE_KEY);
+const loginPanel=document.querySelector("#login-panel"),dashboard=document.querySelector("#dashboard");
+const productsBody=document.querySelector("#products-body"),productForm=document.querySelector("#product-form");
+let products=[],editingId=null,orders=[];
+
+const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[c]));
+const money=v=>`₦${Number(v||0).toLocaleString("en-NG")}`;
+const categoryName=v=>({painting:"Paints",finishes:"Decorative finishes",materials:"Preparation & materials"}[v]||v);
+const showNote=(id,msg)=>{const el=document.querySelector(id);el.textContent=msg;el.style.display="block";setTimeout(()=>el.style.display="none",3500)};
+function slugify(v){return String(v).toLowerCase().trim().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,60)}
+async function isAdmin(){
+  const {data:{user}}=await sb.auth.getUser();
+  if(!user)return false;
+  const {data,error}=await sb.from("admin_users").select("user_id").eq("user_id",user.id).maybeSingle();
+  return !error&&!!data;
+}
+async function loadProducts(){
+  const {data,error}=await sb.from("product_catalog").select("*").order("sort_order",{ascending:true}).order("name",{ascending:true});
+  if(error){showNote("#product-error","Could not load products: "+error.message);return}
+  products=(data||[]);renderProducts();
+}
+function renderProducts(){
+  productsBody.innerHTML=products.map(p=>`<tr>
+<td><strong>${esc(p.name)}</strong><div class="muted">${esc(p.desc)}</div></td>
+<td>${esc(categoryName(p.category))}</td><td>${money(p.price)}</td><td>${p.active?"Yes":"No"}</td>
+<td><div class="product-row-actions"><button class="btn btn-light edit-product" data-id="${esc(p.id)}" type="button">Edit</button><button class="btn btn-light toggle-product" data-id="${esc(p.id)}" type="button">${p.active?"Deactivate":"Activate"}</button></div></td>
+</tr>`).join("");
+  productsBody.querySelectorAll(".edit-product").forEach(b=>b.onclick=()=>startEdit(b.dataset.id));
+  productsBody.querySelectorAll(".toggle-product").forEach(b=>b.onclick=()=>toggleProduct(b.dataset.id));
+}
+function startEdit(id){
+  const p=products.find(x=>x.id===id);if(!p)return;
+  editingId=id;
+  document.querySelector("#product-name").value=p.name;
+  document.querySelector("#product-price").value=p.price;
+  document.querySelector("#product-category").value=p.category;
+  document.querySelector("#product-initial").value=p.initial;
+  document.querySelector("#product-desc").value=p.desc;
+  document.querySelector("#product-active").checked=!!p.active;
+  document.querySelector("#product-save").textContent="Save changes";
+  document.querySelector("#product-cancel").hidden=false;
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function resetProductForm(){
+  editingId=null;productForm.reset();document.querySelector("#product-active").checked=true;
+  document.querySelector("#product-save").textContent="Add product";document.querySelector("#product-cancel").hidden=true;
+}
+async function saveProduct(e){
+  e.preventDefault();
+  const name=document.querySelector("#product-name").value.trim(),price=Number(document.querySelector("#product-price").value),category=document.querySelector("#product-category").value,initial=document.querySelector("#product-initial").value.trim().toUpperCase(),desc=document.querySelector("#product-desc").value.trim(),active=document.querySelector("#product-active").checked;
+  if(!name||!Number.isFinite(price)||price<0||!initial||!desc)return;
+  const payload={name,price,category,initial,desc,active};
+  let result;
+  if(editingId){
+    result=await sb.from("product_catalog").update(payload).eq("id",editingId);
+  }else{
+    let id=slugify(name)||`product-${Date.now()}`;
+    if(products.some(p=>p.id===id))id=`${id}-${Date.now().toString().slice(-5)}`;
+    const maxSort=products.reduce((m,p)=>Math.max(m,Number(p.sort_order)||0),0);
+    result=await sb.from("product_catalog").insert({...payload,id,sort_order:maxSort+1});
+  }
+  if(result.error){showNote("#product-error","Could not save product: "+result.error.message);return}
+  showNote("#product-success",editingId?"Product updated successfully.":"Product added successfully.");
+  resetProductForm();await loadProducts();
+}
+async function toggleProduct(id){
+  const p=products.find(x=>x.id===id);if(!p)return;
+  const {error}=await sb.from("product_catalog").update({active:!p.active}).eq("id",id);
+  if(error){showNote("#product-error","Could not change product status: "+error.message);return}
+  showNote("#product-success",p.active?"Product deactivated.":"Product activated.");await loadProducts();
+}
+
+function formatDate(v){return v?new Date(v).toLocaleString("en-NG"):""}
+function updateStats(list){
+  document.querySelector("#stat-all").textContent=list.length;
+  document.querySelector("#stat-new").textContent=list.filter(o=>o.status==="new").length;
+  document.querySelector("#stat-processing").textContent=list.filter(o=>o.status==="processing").length;
+  document.querySelector("#stat-delivered").textContent=list.filter(o=>o.status==="delivered").length;
+}
+function filteredOrders(){
+  const q=document.querySelector("#search").value.trim().toLowerCase(),s=document.querySelector("#status-filter").value,p=document.querySelector("#payment-filter").value;
+  return orders.filter(o=>(s==="all"||o.status===s)&&(p==="all"||o.payment_status===p)&&(!q||JSON.stringify(o).toLowerCase().includes(q)));
+}
+function renderOrders(){
+  const list=filteredOrders();updateStats(orders);
+  document.querySelector("#orders-body").innerHTML=list.map(o=>{
+    const items=Array.isArray(o.items)?o.items:[];
+    const itemText=items.map(i=>`${esc(i.name)} × ${esc(i.qty)}`).join("<br>");
+    const wa=`https://wa.me/234${String(o.customer_phone||"").replace(/\D/g,"").replace(/^0/,"")}?text=${encodeURIComponent("Hello "+(o.customer_name||"")+", this is OdiwommaHome regarding order "+(o.order_ref||"")+".")}`;
+    return `<tr><td><strong>${esc(o.order_ref)}</strong><div class="muted">${esc(o.order_note||"")}</div></td><td>${esc(o.customer_name)}<br>${esc(o.customer_phone)}<br>${esc(o.delivery_address)}</td><td>${itemText}</td><td>${money(o.total)}</td><td><select class="order-status" data-id="${o.id}"><option value="new" ${o.status==="new"?"selected":""}>New</option><option value="confirmed" ${o.status==="confirmed"?"selected":""}>Confirmed</option><option value="processing" ${o.status==="processing"?"selected":""}>Processing</option><option value="delivered" ${o.status==="delivered"?"selected":""}>Delivered</option><option value="cancelled" ${o.status==="cancelled"?"selected":""}>Cancelled</option></select></td><td><select class="order-payment" data-id="${o.id}"><option value="unpaid" ${o.payment_status==="unpaid"?"selected":""}>Unpaid</option><option value="pending" ${o.payment_status==="pending"?"selected":""}>Pending</option><option value="paid" ${o.payment_status==="paid"?"selected":""}>Paid</option><option value="failed" ${o.payment_status==="failed"?"selected":""}>Failed</option></select></td><td>${formatDate(o.created_at)}</td><td><a class="btn btn-light" href="${wa}" target="_blank" rel="noopener">WhatsApp</a></td></tr>`;
+  }).join("")||'<tr><td colspan="8" class="muted">No orders found.</td></tr>';
+  document.querySelectorAll(".order-status").forEach(el=>el.onchange=()=>updateOrder(el.dataset.id,{status:el.value}));
+  document.querySelectorAll(".order-payment").forEach(el=>el.onchange=()=>updateOrder(el.dataset.id,{payment_status:el.value}));
+}
+async function updateOrder(id,patch){
+  const {error}=await sb.from("orders").update(patch).eq("id",id);
+  if(error){alert("Could not update order: "+error.message);return}
+  await loadOrders();
+}
+async function loadOrders(){
+  const {data,error}=await sb.from("orders").select("*").order("created_at",{ascending:false});
+  if(error){alert("Could not load orders: "+error.message);return}
+  orders=data||[];renderOrders();
+}
+async function showDashboard(){
+  const ok=await isAdmin();
+  if(!ok){loginPanel.hidden=false;dashboard.hidden=true;return}
+  loginPanel.hidden=true;dashboard.hidden=false;await loadProducts();await loadOrders();
+}
+document.querySelector("#login-form").addEventListener("submit",async e=>{
+  e.preventDefault();const email=document.querySelector("#login-email").value.trim(),password=document.querySelector("#login-password").value;
+  const {error}=await sb.auth.signInWithPassword({email,password});
+  document.querySelector("#login-message").textContent=error?error.message:"";
+  if(!error)await showDashboard();
+});
+document.querySelector("#logout-btn").onclick=async()=>{await sb.auth.signOut();location.reload()};
+document.querySelector("#dashboard-logout").onclick=async()=>{await sb.auth.signOut();location.reload()};
+document.querySelector("#refresh-all").onclick=async()=>{await loadProducts();await loadOrders()};
+productForm.addEventListener("submit",saveProduct);
+document.querySelector("#product-cancel").onclick=resetProductForm;
+document.querySelector("#search").oninput=renderOrders;
+document.querySelector("#status-filter").onchange=renderOrders;
+document.querySelector("#payment-filter").onchange=renderOrders;
+document.querySelector("#clear-filters").onclick=()=>{document.querySelector("#search").value="";document.querySelector("#status-filter").value="all";document.querySelector("#payment-filter").value="all";renderOrders()};
+showDashboard();
+</script>
+</body>
+</html>
