@@ -208,14 +208,55 @@ document.addEventListener("DOMContentLoaded", function(){
     ].filter(Boolean).join("\n");
 
     const orderRef = `ODW-${Date.now().toString().slice(-8)}`;
-    const supabaseReady = window.supabase && window.ODIWOMMA_SUPABASE_URL && window.ODIWOMMA_SUPABASE_KEY && !window.ODIWOMMA_SUPABASE_URL.includes("PASTE_") && !window.ODIWOMMA_SUPABASE_KEY.includes("PASTE_");
+
+    // Save the order directly through Supabase's REST API.
+    // This avoids relying on the Supabase JavaScript CDN library being available.
+    const supabaseReady =
+      window.ODIWOMMA_SUPABASE_URL &&
+      window.ODIWOMMA_SUPABASE_KEY &&
+      !window.ODIWOMMA_SUPABASE_URL.includes("PASTE_") &&
+      !window.ODIWOMMA_SUPABASE_KEY.includes("PASTE_");
+
     if (supabaseReady) {
       try {
-        const client = window.supabase.createClient(window.ODIWOMMA_SUPABASE_URL, window.ODIWOMMA_SUPABASE_KEY, { auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false } });
-        const payload = { order_ref: orderRef, customer_name: name, customer_phone: phone, delivery_address: address, order_note: note || null, items: cart.map(i => { const p = productById(i.id); return { id:p.id, name:p.name, qty:i.qty }; }) };
-        const { error } = await client.from("orders").insert(payload);
-        if (error) { console.error("Order database save failed:", error); alert("The order could not be saved to the OdiwommaHome order system. WhatsApp can still open, but please tell the admin this message: " + error.message); }
-      } catch (err) { console.warn("Order database save failed:", err); }
+        const payload = {
+          order_ref: orderRef,
+          customer_name: name,
+          customer_phone: phone,
+          delivery_address: address,
+          order_note: note || null,
+          items: cart.map(i => {
+            const p = productById(i.id);
+            return { id: p.id, name: p.name, qty: i.qty };
+          })
+        };
+
+        const response = await fetch(
+          `${window.ODIWOMMA_SUPABASE_URL}/rest/v1/orders`,
+          {
+            method: "POST",
+            headers: {
+              "apikey": window.ODIWOMMA_SUPABASE_KEY,
+              "Authorization": `Bearer ${window.ODIWOMMA_SUPABASE_KEY}`,
+              "Content-Type": "application/json",
+              "Prefer": "return=minimal"
+            },
+            body: JSON.stringify(payload)
+          }
+        );
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error("Order database save failed:", response.status, errorText);
+          alert("The order could not be saved to the order system. WhatsApp will still open. Please tell the admin: " + errorText);
+        }
+      } catch (err) {
+        console.error("Order database save failed:", err);
+        alert("The order could not be saved to the order system. WhatsApp will still open. Please tell the admin about the connection error.");
+      }
+    } else {
+      console.error("Supabase configuration is missing.");
+      alert("The order system configuration is missing. WhatsApp will still open.");
     }
 
     const messageWithRef = [message, `Order reference: ${orderRef}`].join("\n");
