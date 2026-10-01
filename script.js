@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", async function(){
-  const menu=document.querySelector(".menu"), links=document.querySelector(".nav-links");
+
+  const menu=document.querySelector(".menu");
+  const links=document.querySelector(".nav-links");
 
   if(menu&&links){
     menu.addEventListener("click",()=>{
@@ -26,15 +28,17 @@ document.addEventListener("DOMContentLoaded", async function(){
     !window.ODIWOMMA_SUPABASE_KEY.includes("PASTE_");
 
   async function loadCatalogue(){
+
     if(!supabaseReady){
       window.ODIWOMMA_PRODUCTS=localProducts;
       return;
     }
 
     try{
+
       const url=
         `${window.ODIWOMMA_SUPABASE_URL}/rest/v1/product_catalog` +
-        `?select=id,name,category,desc,initial,price` +
+        `?select=id,name,category,desc,initial,price,image_url` +
         `&active=eq.true&order=sort_order.asc,name.asc`;
 
       const response=await fetch(url,{
@@ -51,15 +55,18 @@ document.addEventListener("DOMContentLoaded", async function(){
       const remote=await response.json();
 
       if(Array.isArray(remote) && remote.length){
+
         window.ODIWOMMA_PRODUCTS=remote.map(p=>({
           ...p,
           price:Number(p.price)||0
         }));
+
       }else{
         window.ODIWOMMA_PRODUCTS=localProducts;
       }
 
     }catch(err){
+
       console.warn(
         "Saved catalogue unavailable. Using local catalogue.",
         err
@@ -124,11 +131,25 @@ document.addEventListener("DOMContentLoaded", async function(){
     );
 
     productGrid.innerHTML=filtered.map(p=>`
+
       <article class="product-card">
 
         <div class="product-visual">
-          <span class="product-tag">${p.category}</span>
-          <span class="product-initial">${p.initial}</span>
+
+          ${
+            p.image_url
+            ? `<img
+                class="product-image"
+                src="${p.image_url}"
+                alt="${p.name}"
+                loading="lazy"
+              >`
+            : `
+              <span class="product-tag">${p.category}</span>
+              <span class="product-initial">${p.initial}</span>
+            `
+          }
+
         </div>
 
         <div class="product-body">
@@ -153,6 +174,7 @@ document.addEventListener("DOMContentLoaded", async function(){
         </div>
 
       </article>
+
     `).join("");
 
     document.querySelector("#empty-products").hidden=
@@ -262,7 +284,7 @@ document.addEventListener("DOMContentLoaded", async function(){
                 class="qty-btn"
                 data-minus="${p.id}"
                 type="button">
-                −
+                -
               </button>
 
               <strong>${i.qty}</strong>
@@ -318,7 +340,6 @@ document.addEventListener("DOMContentLoaded", async function(){
   }
 
   function openCart(){
-
     document.body.classList.add("cart-open");
 
     cartDrawer.setAttribute(
@@ -328,7 +349,6 @@ document.addEventListener("DOMContentLoaded", async function(){
   }
 
   function closeCart(){
-
     document.body.classList.remove("cart-open");
 
     cartDrawer.setAttribute(
@@ -409,7 +429,7 @@ document.addEventListener("DOMContentLoaded", async function(){
           <div class="checkout-summary-item">
 
             <span>
-              ${p.name} × ${i.qty}
+              ${p.name} x ${i.qty}
             </span>
 
             <strong>
@@ -564,7 +584,7 @@ document.addEventListener("DOMContentLoaded", async function(){
 
         const p=productById(i.id);
 
-        return `• ${p.name} x${i.qty} = ${money(
+        return `${p.name} x${i.qty} = ${money(
           p.price*i.qty
         )}`;
 
