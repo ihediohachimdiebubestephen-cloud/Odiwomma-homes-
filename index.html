@@ -388,14 +388,50 @@ input:focus,textarea:focus,select:focus{
 }
 </style>
 
-<style id="odiwomma-v3-final">
-:root{--bg:#ebe6dc;--surface:#f8f5ee;--surface-2:#e2ebe5;--ink:#17332e;--muted:#65716d;--accent:#c77a3b;--line:#cfc8bb}
-body{background:#ebe6dc!important;color:#17332e!important}
-.trust-section{background:#17332e!important}
-.trust-item{background:#f8f5ee!important;box-shadow:0 22px 48px rgba(0,0,0,.22)!important;border-radius:20px!important}
-.process-card{background:#f8f5ee!important;border-color:rgba(23,51,46,.12)!important;box-shadow:0 10px 24px rgba(23,51,46,.07)!important}
-.logo{border-radius:50%!important;mix-blend-mode:multiply!important;box-shadow:none!important}
+<style>
+/* Homepage card correction v4 */
+.trust-grid{
+  gap:24px!important;
+}
+.trust-item{
+  background:#ffffff!important;
+  border:1px solid rgba(22,48,43,.12)!important;
+  border-radius:18px!important;
+  box-shadow:0 16px 34px rgba(22,48,43,.16), 0 4px 10px rgba(22,48,43,.08)!important;
+  padding:2.4rem 1.5rem!important;
+}
+.trust-item:hover{
+  transform:translateY(-6px);
+  box-shadow:0 22px 44px rgba(22,48,43,.20), 0 6px 14px rgba(22,48,43,.10)!important;
+}
+.process-grid{
+  border-top:0!important;
+  gap:22px!important;
+}
+.process-card{
+  background:#ffffff!important;
+  border:1px solid rgba(22,48,43,.12)!important;
+  border-radius:18px!important;
+  box-shadow:0 16px 34px rgba(22,48,43,.14), 0 4px 10px rgba(22,48,43,.07)!important;
+  padding:2rem 1.5rem!important;
+  min-height:220px;
+  transition:transform .25s ease,box-shadow .25s ease;
+}
+.process-card:last-child{border-right:1px solid rgba(22,48,43,.12)!important;}
+.process-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 22px 44px rgba(22,48,43,.18), 0 6px 14px rgba(22,48,43,.09)!important;
+}
+@media(max-width:900px){
+  .process-card{
+    border:1px solid rgba(22,48,43,.12)!important;
+    border-radius:18px!important;
+    min-height:0;
+  }
+  .process-card:last-child{border:1px solid rgba(22,48,43,.12)!important;}
+}
 </style>
+
 </head>
 <body>
 
