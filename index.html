@@ -89,6 +89,74 @@
   }
 </style>
 
+
+<style>
+/* OdiwommaHome visual refresh */
+:root{--oh-ink:#171717;--oh-muted:#68645d;--oh-cream:#f4f0e8;--oh-white:#fffdf9;--oh-accent:#b76b35;--oh-line:rgba(23,23,23,.12);}
+body{background:var(--oh-cream);color:var(--oh-ink);}
+.topbar{background:#171717!important;color:#fff!important;letter-spacing:.08em;text-transform:uppercase;font-size:.68rem;}
+.site-header{background:rgba(244,240,232,.94)!important;border-bottom:1px solid var(--oh-line);backdrop-filter:blur(12px);}
+.nav{min-height:78px!important;}
+.nav-links a{font-weight:600!important;}
+.nav-cta,.btn{border-radius:2px!important;letter-spacing:.03em;font-weight:700!important;}
+.hero{padding:0 0 5rem!important;display:grid!important;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)!important;gap:0!important;align-items:stretch;background:var(--oh-cream);}
+.hero-copy{max-width:none!important;margin:0!important;padding:clamp(4rem,8vw,8rem) clamp(1.25rem,5vw,6rem)!important;display:flex;flex-direction:column;justify-content:center;}
+.hero h1{font-size:clamp(3.5rem,7vw,7rem)!important;line-height:.92!important;letter-spacing:-.06em!important;max-width:760px;}
+.hero h1 em{font-weight:400;}
+.hero .lead{font-size:1.08rem!important;line-height:1.75!important;color:var(--oh-muted);max-width:620px;}
+.hero-media{min-height:650px!important;height:calc(100vh - 78px)!important;max-height:850px!important;position:relative;overflow:hidden;}
+.hero-media img{width:100%;height:100%;object-fit:cover;transform:scale(1.01);}
+.hero-overlay{left:2rem!important;right:2rem!important;bottom:2rem!important;background:rgba(20,20,20,.78)!important;border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(8px);padding:1.2rem 1.4rem!important;}
+.section{padding:clamp(5rem,9vw,9rem) 0!important;}
+.section-head{align-items:end!important;margin-bottom:3rem!important;}
+.section-head h2,.mission-section h2{font-size:clamp(2.5rem,5vw,5rem)!important;line-height:.98!important;letter-spacing:-.045em!important;}
+.cards{grid-template-columns:repeat(3,1fr)!important;gap:0!important;border-top:1px solid var(--oh-line);border-bottom:1px solid var(--oh-line);}
+.card{border:0!important;border-right:1px solid var(--oh-line)!important;border-radius:0!important;background:transparent!important;padding:2.5rem!important;min-height:270px;}
+.card:last-child{border-right:0!important;}
+.card .num,.process-card .num{font-size:.75rem!important;letter-spacing:.12em;color:var(--oh-accent);font-weight:800;}
+.card h3{font-size:1.65rem!important;margin-top:3rem!important;}
+.trust-section{background:#171717;color:#fff;border:0!important;padding:4.5rem 0!important;}
+.trust-grid{grid-template-columns:repeat(3,1fr)!important;gap:0!important;}
+.trust-item{border-right:1px solid rgba(255,255,255,.16);padding:1rem 2rem!important;}
+.trust-item:last-child{border-right:0;}
+.trust-number{font-size:clamp(3rem,6vw,5rem)!important;letter-spacing:-.05em;}
+.trust-label{color:rgba(255,255,255,.65);text-transform:uppercase;font-size:.72rem;letter-spacing:.12em;}
+.mission-section{background:var(--oh-white);}
+.mission-grid{grid-template-columns:.8fr 1.2fr!important;gap:7rem!important;align-items:center!important;}
+.mission-copy{font-size:1.08rem;line-height:1.9;color:#45413b;}
+.process-section{background:#e9e3d8!important;}
+.process-grid{grid-template-columns:repeat(5,1fr)!important;gap:0!important;border-top:1px solid var(--oh-line);}
+.process-card{border:0!important;border-right:1px solid var(--oh-line)!important;border-radius:0!important;background:transparent!important;padding:2rem 1.5rem!important;}
+.process-card:last-child{border-right:0!important;}
+.process-card h3{font-size:1.25rem!important;}
+.projects-grid{gap:1rem!important;}
+.project-card{border-radius:0!important;overflow:hidden!important;position:relative;min-height:420px;}
+.project-card img{height:100%!important;min-height:420px;object-fit:cover;transition:transform .5s ease;}
+.project-card:hover img{transform:scale(1.04);}
+.project-label{background:linear-gradient(transparent,rgba(0,0,0,.82))!important;padding:5rem 1.5rem 1.5rem!important;}
+.video-request{background:var(--oh-white);}
+.video-request .container{border:1px solid var(--oh-line);padding:clamp(2rem,5vw,5rem)!important;}
+.dark{background:#171717!important;color:#fff;}
+.dark .eyebrow{color:#c88a59;}
+footer{background:#111!important;color:#fff;}
+.whatsapp{border-radius:2px!important;}
+@media(max-width:900px){
+ .hero{grid-template-columns:1fr!important;padding-bottom:0!important;}
+ .hero-copy{padding:4rem 1.25rem 3rem!important;}
+ .hero-media{height:62vh!important;min-height:460px!important;}
+ .cards{grid-template-columns:1fr!important;}
+ .card{border-right:0!important;border-bottom:1px solid var(--oh-line)!important;min-height:0;}
+ .card:last-child{border-bottom:0!important;}
+ .trust-grid{grid-template-columns:1fr!important;}
+ .trust-item{border-right:0;border-bottom:1px solid rgba(255,255,255,.16);padding:2rem!important;}
+ .trust-item:last-child{border-bottom:0;}
+ .mission-grid{grid-template-columns:1fr!important;gap:2rem!important;}
+ .process-grid{grid-template-columns:1fr!important;}
+ .process-card{border-right:0!important;border-bottom:1px solid var(--oh-line)!important;}
+ .process-card:last-child{border-bottom:0!important;}
+ .project-card,.project-card img{min-height:330px;}
+}
+</style>
 </head>
 <body>
 
@@ -113,7 +181,7 @@
     <p class="lead">OdiwommaHome brings together professional painting, wall preparation, decorative finishes and practical home improvement to help every space feel finished.</p>
     <div class="actions">
       <a class="btn" href="contact.html">Start a Project</a>
-      <a class="btn secondary" href="projects.html">View Our Work</a>
+      <a class="btn secondary" href="projects.html">Explore Our Inspirations</a>
     </div>
   </div>
   <div class="hero-media">
