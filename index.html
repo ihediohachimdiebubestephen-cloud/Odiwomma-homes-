@@ -1094,7 +1094,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const number = item.querySelector(".trust-number");
     if (!number) return;
 
-    const duration = 1400;
+    const durations = [2000, 2300, 2100];
+    const duration = durations[Array.from(items).indexOf(item)] || 2100;
     const start = performance.now();
 
     function easeOut(t) {
