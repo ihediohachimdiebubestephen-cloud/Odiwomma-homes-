@@ -6,6 +6,89 @@
 <meta name="description" content="OdiwommaHome, professional painting, finishing and home improvement.">
 <title>Home | OdiwommaHome</title>
 <link rel="stylesheet" href="styles.css">
+
+<style>
+  .trust-section {
+    padding: 3.5rem 0;
+    border-top: 1px solid rgba(0,0,0,.08);
+    border-bottom: 1px solid rgba(0,0,0,.08);
+  }
+  .trust-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+  .trust-item {
+    text-align: center;
+    padding: 1.5rem 1rem;
+  }
+  .trust-number {
+    display: block;
+    font-size: clamp(2rem, 5vw, 3.25rem);
+    line-height: 1;
+    font-weight: 700;
+    margin-bottom: .65rem;
+  }
+  .trust-label {
+    display: block;
+    font-size: .95rem;
+    letter-spacing: .03em;
+    opacity: .78;
+  }
+  .mission-section {
+    padding: 5rem 0;
+  }
+  .mission-grid {
+    display: grid;
+    grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+    gap: 3rem;
+    align-items: start;
+  }
+  .mission-copy p {
+    max-width: 760px;
+    margin: 0 0 1rem;
+  }
+  .process-section {
+    padding: 5rem 0;
+  }
+  .process-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1rem;
+  }
+  .process-card {
+    padding: 1.5rem;
+    border: 1px solid rgba(0,0,0,.1);
+    border-radius: 14px;
+    background: rgba(255,255,255,.55);
+  }
+  .process-card .num {
+    display: block;
+    margin-bottom: 1rem;
+  }
+  .process-card h3 {
+    margin: 0 0 .6rem;
+  }
+  .process-card p {
+    margin: 0;
+  }
+  @media (max-width: 800px) {
+    .trust-grid {
+      grid-template-columns: 1fr;
+    }
+    .trust-item {
+      padding: 1rem;
+    }
+    .mission-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    .process-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
 </head>
 <body>
 
@@ -49,6 +132,83 @@
       <article class="card"><span class="num">01</span><h3>Transform</h3><p>Refresh tired spaces with considered colours, clean lines and professional finishing.</p></article>
       <article class="card"><span class="num">02</span><h3>Prepare</h3><p>Proper wall preparation and the right materials create a stronger, cleaner result.</p></article>
       <article class="card"><span class="num">03</span><h3>Finish</h3><p>Interior and exterior work completed with attention to the small details that matter.</p></article>
+    </div>
+  </div>
+</section>
+
+
+<section class="trust-section">
+  <div class="container">
+    <div class="trust-grid">
+      <div class="trust-item">
+        <span class="trust-number">10+</span>
+        <span class="trust-label">Years of Experience</span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-number">500+</span>
+        <span class="trust-label">Projects Completed</span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-number">100%</span>
+        <span class="trust-label">Quality Guarantee</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section mission-section">
+  <div class="container">
+    <div class="mission-grid">
+      <div>
+        <div class="eyebrow">Our Mission</div>
+        <h2>Transforming spaces.<br><em>Creating beautiful identities.</em></h2>
+      </div>
+      <div class="mission-copy">
+        <p>Our mission is to help people create spaces they can be proud of through professional painting, careful preparation, quality finishing and practical home improvement.</p>
+        <p>We believe a beautiful space is not only about colour. It is about understanding the space, using the right materials, paying attention to detail and delivering a finish that lasts.</p>
+        <p>Every project is an opportunity to make a space look better, feel better and reflect the personality of the people who call it home.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section alt process-section">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">How We Work</div>
+        <h2>A simple process.<br><em>A careful finish.</em></h2>
+      </div>
+      <p>From the first conversation to the final result, we keep the process clear and focused on quality.</p>
+    </div>
+    <div class="process-grid">
+      <article class="process-card">
+        <span class="num">01</span>
+        <h3>Consultation</h3>
+        <p>Tell us what you want to change and what you want your space to feel like.</p>
+      </article>
+      <article class="process-card">
+        <span class="num">02</span>
+        <h3>Assessment</h3>
+        <p>We look at the space, surfaces and work required before planning the job.</p>
+      </article>
+      <article class="process-card">
+        <span class="num">03</span>
+        <h3>Preparation</h3>
+        <p>Proper preparation helps create a cleaner, stronger and longer-lasting finish.</p>
+      </article>
+      <article class="process-card">
+        <span class="num">04</span>
+        <h3>Execution</h3>
+        <p>We carry out the painting, finishing or improvement work with attention to detail.</p>
+      </article>
+      <article class="process-card">
+        <span class="num">05</span>
+        <h3>Final Delivery</h3>
+        <p>We complete the work and leave you with a space that feels finished and ready to enjoy.</p>
+      </article>
     </div>
   </div>
 </section>
