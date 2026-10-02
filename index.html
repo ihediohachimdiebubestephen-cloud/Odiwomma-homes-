@@ -1144,6 +1144,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 </script>
-\n<script>\n(function () {\n  const phone = "2349046193188";\n  document.querySelectorAll('a[href*="wa.me/2349046193188"]').forEach(function (link) {\n    link.addEventListener("click", function (event) {\n      event.preventDefault();\n      const webUrl = link.href;\n      const text = link.href.includes("?text=")\n        ? new URL(link.href).searchParams.get("text") || ""\n        : "";\n      const appUrl = "whatsapp://send?phone=" + phone + (text ? "&text=" + encodeURIComponent(text) : "");\n      let leftPage = false;\n      const onHide = function () { leftPage = true; };\n      document.addEventListener("visibilitychange", onHide, { once: true });\n      window.location.href = appUrl;\n      setTimeout(function () {\n        document.removeEventListener("visibilitychange", onHide);\n        if (!leftPage && document.visibilityState === "visible") {\n          window.location.href = webUrl;\n        }\n      }, 900);\n    });\n  });\n})();\n</script>\n
+
 </body>
 </html>
