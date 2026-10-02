@@ -834,6 +834,22 @@ input:focus,textarea:focus,select:focus{
 }
 </style>
 
+
+<style>
+/* OdiwommaHome trust number count animation */
+.trust-number{
+  display:block;
+  min-height:1em;
+  transition:transform .25s ease, opacity .25s ease;
+}
+.trust-item.is-counting .trust-number{
+  transform:scale(1.04);
+}
+@media (prefers-reduced-motion: reduce){
+  .trust-number{transition:none;}
+}
+</style>
+
 </head>
 <body>
 
@@ -1057,6 +1073,76 @@ input:focus,textarea:focus,select:focus{
 <a class="whatsapp" href="https://wa.me/2349046193188" target="_blank" rel="noopener">WhatsApp</a>
 
 <script src="script.js"></script>
+<script>
+/* OdiwommaHome animated trust numbers */
+document.addEventListener("DOMContentLoaded", function () {
+  const items = document.querySelectorAll(".trust-item");
+
+  if (!items.length) return;
+
+  const targets = [
+    { value: 10, suffix: "+", decimals: 0 },
+    { value: 500, suffix: "+", decimals: 0 },
+    { value: 100, suffix: "%", decimals: 0 }
+  ];
+
+  function animateNumber(item, config) {
+    if (item.dataset.counted === "true") return;
+    item.dataset.counted = "true";
+    item.classList.add("is-counting");
+
+    const number = item.querySelector(".trust-number");
+    if (!number) return;
+
+    const duration = 1400;
+    const start = performance.now();
+
+    function easeOut(t) {
+      return 1 - Math.pow(1 - t, 3);
+    }
+
+    function frame(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      const current = config.value * easeOut(progress);
+      number.textContent =
+        Math.round(current).toLocaleString() + config.suffix;
+
+      if (progress < 1) {
+        requestAnimationFrame(frame);
+      } else {
+        number.textContent =
+          config.value.toLocaleString() + config.suffix;
+        item.classList.remove("is-counting");
+      }
+    }
+
+    requestAnimationFrame(frame);
+  }
+
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+
+        const index = Array.from(items).indexOf(entry.target);
+        if (targets[index]) {
+          animateNumber(entry.target, targets[index]);
+        }
+
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.35 });
+
+    items.forEach(function (item) {
+      observer.observe(item);
+    });
+  } else {
+    items.forEach(function (item, index) {
+      if (targets[index]) animateNumber(item, targets[index]);
+    });
+  }
+});
+</script>
 
 </body>
 </html>
