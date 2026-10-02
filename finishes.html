@@ -72,6 +72,53 @@ h1 em,h2 em{color:var(--accent);font-style:italic}
 .finish{display:flex;justify-content:space-between;align-items:center;padding:18px 0;border-bottom:1px solid var(--line);font-size:14px}
 .finish:nth-child(odd){margin-right:30px}
 .finish span:last-child{color:var(--accent);font-size:18px}
+
+/* Finish cards */
+.finish-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:22px;
+  border-top:0;
+}
+.finish{
+  min-height:118px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:18px;
+  padding:24px 25px;
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:14px;
+  font-size:15px;
+  font-weight:600;
+  box-shadow:0 10px 26px rgba(29,29,26,.10);
+  transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;
+}
+.finish:nth-child(odd){margin-right:0}
+.finish:hover{
+  transform:translateY(-4px);
+  border-color:rgba(139,107,79,.45);
+  box-shadow:0 16px 32px rgba(29,29,26,.16);
+}
+.finish span:first-child{line-height:1.35}
+.finish span:last-child{
+  flex:0 0 auto;
+  color:var(--accent);
+  font-size:20px;
+}
+@media(max-width:900px){
+  .finish-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+}
+@media(max-width:600px){
+  .finish-grid{grid-template-columns:1fr;gap:16px;}
+  .finish{min-height:100px;padding:21px 20px;border-radius:12px;}
+}
+@media(prefers-reduced-motion:reduce){
+  .finish{transition:none}
+  .finish:hover{transform:none}
+}
+
 .page-hero{padding:95px 0 70px;border-bottom:1px solid var(--line);background:var(--surface)}
 .page-hero p{max-width:650px;color:var(--muted);font-size:16px;margin:22px 0 0}
 .about-layout{display:grid;grid-template-columns:.8fr 1.2fr;gap:10%;align-items:start}
@@ -166,11 +213,17 @@ footer a:hover{color:white}
 <main>
 <section class="page-hero"><div class="container"><div class="eyebrow">Materials & finishes</div><h1>The right finish<br><em>changes everything.</em></h1><p>We work with a range of paint and finishing materials to suit different surfaces, spaces and design goals.</p></div></section>
 <section class="section"><div class="container"><div class="finish-grid">
-<div class="finish"><span>Silk Paint</span><span>↗</span></div><div class="finish"><span>Matt Emulsion Paint</span><span>↗</span></div>
-<div class="finish"><span>Emulsion Paint</span><span>↗</span></div><div class="finish"><span>Textcoat Paint</span><span>↗</span></div>
-<div class="finish"><span>Gravitex Paint</span><span>↗</span></div><div class="finish"><span>Primer</span><span>↗</span></div>
-<div class="finish"><span>Oil Paint</span><span>↗</span></div><div class="finish"><span>Potty</span><span>↗</span></div>
-<div class="finish"><span>Mineral Stone Paint</span><span>↗</span></div><div class="finish"><span>Screeding Paint</span><span>↗</span></div>
+<div class="finish"><span>Odiwomma Silk Paint</span><span class="finish-stars">★ ★ ★</span></div>
+<div class="finish"><span>Odiwomma Matt Emulsion Paint</span><span class="finish-stars">★ ★ ★</span></div>
+<div class="finish"><span>Odiwomma Emulsion Paint</span><span class="finish-stars">★ ★ ★</span></div>
+<div class="finish"><span>Odiwomma Textcoat Paint</span><span class="finish-stars">★ ★ ★</span></div>
+<div class="finish"><span>Odiwomma Gravitex Paint</span><span class="finish-stars">★ ★ ★</span></div>
+<div class="finish"><span>Odiwomma Primer Paint</span><span class="finish-stars">★ ★ ★</span></div>
+<div class="finish"><span>Odiwomma Oil Paint</span><span class="finish-stars">★ ★ ★</span></div>
+<div class="finish"><span>Odiwomma Potty Paint</span><span class="finish-stars">★ ★ ★</span></div>
+<div class="finish"><span>Odiwomma Mineral Stone Paint</span><span class="finish-stars">★ ★ ★</span></div>
+<div class="finish"><span>Odiwomma Screeding Paint</span><span class="finish-stars">★ ★ ★</span></div>
+<div class="finish"><span>Odiwomma Lime Wash Paint</span><span class="finish-stars">★ ★ ★</span></div>
 </div></div></section>
 <section class="section dark"><div class="container"><div class="section-head"><div><div class="eyebrow">Project specific</div><h2>We help match the<br><em>finish to the space.</em></h2></div><a class="btn" href="contact.html">Discuss Your Project</a></div></div></section>
 </main>
