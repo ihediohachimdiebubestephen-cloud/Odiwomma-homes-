@@ -850,7 +850,7 @@ input:focus,textarea:focus,select:focus{
 }
 </style>
 
-\n<style>\n/* OdiwommaHome scroll reveal animation */\n.scroll-reveal {\n  opacity: 0;\n  transform: translateY(24px);\n  transition: opacity .7s ease, transform .7s cubic-bezier(.22,1,.36,1);\n  will-change: opacity, transform;\n}\n.scroll-reveal.is-visible {\n  opacity: 1;\n  transform: none;\n}\n@media (prefers-reduced-motion: reduce) {\n  .scroll-reveal {\n    opacity: 1;\n    transform: none;\n    transition: none;\n  }\n}\n</style>\n</head>
+</head>
 <body>
 
 <div class="topbar"><div class="container"><span>OdiwommaHome</span><span>Painting · Finishing · Home Improvement</span></div></div>
@@ -1144,52 +1144,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 </script>
-<script>
-/* OdiwommaHome scroll reveal */
-document.addEventListener("DOMContentLoaded", function () {
-  if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-  if (!("IntersectionObserver" in window)) return;
-
-  const sections = document.querySelectorAll("main > section:not(.hero):not(.trust-section)");
-  const revealItems = [];
-
-  sections.forEach(function (section) {
-    const container = section.querySelector(".container");
-    if (!container) return;
-
-    const children = Array.from(container.children).filter(function (el) {
-      return !el.classList.contains("trust-grid");
-    });
-
-    children.forEach(function (el, index) {
-      el.classList.add("scroll-reveal");
-      el.style.transitionDelay = Math.min(index * 90, 270) + "ms";
-      revealItems.push(el);
-    });
-  });
-
-  document.querySelectorAll(".project-card, .process-card, .card").forEach(function (el, index) {
-    if (el.closest(".hero") || el.closest(".trust-section")) return;
-    if (!el.classList.contains("scroll-reveal")) {
-      el.classList.add("scroll-reveal");
-      el.style.transitionDelay = Math.min((index % 4) * 90, 270) + "ms";
-      revealItems.push(el);
-    }
-  });
-
-  const observer = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add("is-visible");
-      observer.unobserve(entry.target);
-    });
-  }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
-
-  revealItems.forEach(function (el) {
-    observer.observe(el);
-  });
-});
-</script>
-
+\n<script>\n(function () {\n  const phone = "2349046193188";\n  document.querySelectorAll('a[href*="wa.me/2349046193188"]').forEach(function (link) {\n    link.addEventListener("click", function (event) {\n      event.preventDefault();\n      const webUrl = link.href;\n      const text = link.href.includes("?text=")\n        ? new URL(link.href).searchParams.get("text") || ""\n        : "";\n      const appUrl = "whatsapp://send?phone=" + phone + (text ? "&text=" + encodeURIComponent(text) : "");\n      let leftPage = false;\n      const onHide = function () { leftPage = true; };\n      document.addEventListener("visibilitychange", onHide, { once: true });\n      window.location.href = appUrl;\n      setTimeout(function () {\n        document.removeEventListener("visibilitychange", onHide);\n        if (!leftPage && document.visibilityState === "visible") {\n          window.location.href = webUrl;\n        }\n      }, 900);\n    });\n  });\n})();\n</script>\n
 </body>
 </html>
