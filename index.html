@@ -848,57 +848,8 @@ input:focus,textarea:focus,select:focus{
 @media (prefers-reduced-motion: reduce){
   .trust-number{transition:none;}
 }
-
-
-/* OdiwommaHome subtle card reveal animation */
-html.oh-card-reveal .process-card,
-html.oh-card-reveal .project-card{
-  opacity:0;
-  transform:translateY(24px);
-  transition:opacity .7s cubic-bezier(.22,.61,.36,1),
-             transform .7s cubic-bezier(.22,.61,.36,1);
-  transition-delay:var(--oh-reveal-delay,0ms);
-}
-
-html.oh-card-reveal .process-card.is-visible,
-html.oh-card-reveal .project-card.is-visible{
-  opacity:1;
-  transform:translateY(0);
-}
-
-.process-card.is-visible,
-.project-card.is-visible{
-  will-change:auto;
-}
-
-@media (prefers-reduced-motion:reduce){
-  html.oh-card-reveal .process-card,
-  html.oh-card-reveal .project-card{
-    opacity:1;
-    transform:none;
-    transition:none;
-  }
-}
 </style>
 
-
-<style>
-/* OdiwommaHome service hero slider */
-.oh-slider{position:relative;overflow:hidden;background:var(--oh-sand,#e8ded0);isolation:isolate;}
-.oh-slides,.oh-slide{position:absolute;inset:0;}
-.oh-slide{opacity:0;visibility:hidden;transform:scale(1.015);transition:opacity .75s ease,transform 1.1s ease,visibility .75s;}
-.oh-slide.is-active{opacity:1;visibility:visible;transform:scale(1);z-index:1;}
-.oh-slide>img{width:100%;height:100%;object-fit:cover;}
-.oh-slide .hero-overlay{z-index:2;}
-.oh-slider-btn{position:absolute;z-index:5;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.5);background:rgba(15,37,33,.78);color:#fff;font-size:30px;line-height:1;display:grid;place-items:center;cursor:pointer;transition:.2s;}
-.oh-slider-btn:hover{background:var(--oh-accent,#c9783d);border-color:var(--oh-accent,#c9783d);}
-.oh-prev{left:18px}.oh-next{right:18px}
-.oh-dots{position:absolute;z-index:6;right:22px;bottom:22px;display:flex;gap:7px;align-items:center;}
-.oh-dots button{width:8px;height:8px;padding:0;border:0;border-radius:50%;background:rgba(255,255,255,.55);cursor:pointer;transition:.25s;}
-.oh-dots button.is-active{width:24px;border-radius:8px;background:#fff;}
-@media(max-width:600px){.oh-slider-btn{width:38px;height:38px;font-size:25px}.oh-prev{left:12px}.oh-next{right:12px}.oh-dots{right:14px;bottom:14px}.oh-slide .hero-overlay{inset:auto 14px 48px 14px;padding:15px 16px}.oh-slide .hero-overlay strong{font-size:21px}.oh-slide .hero-overlay span{font-size:9px}}
-@media(prefers-reduced-motion:reduce){.oh-slide{transition:none}.oh-slider-btn,.oh-dots button{transition:none}}
-</style>
 </head>
 <body>
 
@@ -926,27 +877,9 @@ html.oh-card-reveal .project-card.is-visible{
       <a class="btn secondary" href="projects.html">Explore Our Inspirations</a>
     </div>
   </div>
-  <div class="hero-media oh-slider" aria-label="OdiwommaHome services showcase">
-    <div class="oh-slides">
-      <article class="oh-slide is-active"><img src="odwomma-hero-slider/painting.svg" alt="Professional painting service"><div class="hero-overlay"><strong>Professional Painting</strong><span>Clean colour · Careful preparation · Beautiful finish</span></div></article>
-      <article class="oh-slide"><img src="odwomma-hero-slider/finishes.svg" alt="Decorative finishes service"><div class="hero-overlay"><strong>Decorative Finishes</strong><span>Texture · Depth · Character</span></div></article>
-      <article class="oh-slide"><img src="odwomma-hero-slider/interior.svg" alt="Interior design service"><div class="hero-overlay"><strong>Interior Design</strong><span>Thoughtful spaces designed around you</span></div></article>
-      <article class="oh-slide"><img src="odwomma-hero-slider/exterior.svg" alt="Exterior design service"><div class="hero-overlay"><strong>Exterior Design</strong><span>Beautiful first impressions that last</span></div></article>
-      <article class="oh-slide"><img src="odwomma-hero-slider/furniture.svg" alt="Furniture and decor service"><div class="hero-overlay"><strong>Furniture &amp; Decor</strong><span>Comfort · Character · Finishing details</span></div></article>
-      <article class="oh-slide"><img src="odwomma-hero-slider/renovation.svg" alt="Home renovation service"><div class="hero-overlay"><strong>Home Renovation</strong><span>Practical upgrades with a clean finish</span></div></article>
-      <article class="oh-slide"><img src="odwomma-hero-slider/improvement.svg" alt="Home improvement service"><div class="hero-overlay"><strong>Home Improvement</strong><span>The details that make a space feel complete</span></div></article>
-    </div>
-    <button class="oh-slider-btn oh-prev" type="button" aria-label="Previous service">‹</button>
-    <button class="oh-slider-btn oh-next" type="button" aria-label="Next service">›</button>
-    <div class="oh-dots" role="tablist" aria-label="Service slides">
-      <button class="is-active" type="button" aria-label="Professional Painting" aria-selected="true"></button>
-      <button type="button" aria-label="Decorative Finishes" aria-selected="false"></button>
-      <button type="button" aria-label="Interior Design" aria-selected="false"></button>
-      <button type="button" aria-label="Exterior Design" aria-selected="false"></button>
-      <button type="button" aria-label="Furniture and Decor" aria-selected="false"></button>
-      <button type="button" aria-label="Home Renovation" aria-selected="false"></button>
-      <button type="button" aria-label="Home Improvement" aria-selected="false"></button>
-    </div>
+  <div class="hero-media">
+    <img src="project-2.jpg" alt="OdiwommaHome project">
+    <div class="hero-overlay"><strong>Crafted for the way you live.</strong><span>Real work · Thoughtful finishing</span></div>
   </div>
 </section>
 
@@ -1080,7 +1013,7 @@ html.oh-card-reveal .project-card.is-visible{
     </div>
 
     <div class="actions">
-      <a class="btn" href="https://wa.me/2349046183180?text=Hello%20OdiwommaHome%2C%20I%20would%20like%20advice%20about%20my%20space." target="_blank" rel="noopener">
+      <a class="btn" href="https://wa.me/2349046193188?text=Hello%20OdiwommaHome%2C%20I%20would%20like%20advice%20about%20my%20space." target="_blank" rel="noopener">
         Text Us on WhatsApp
       </a>
       <a class="btn secondary" href="contact.html">Contact Us</a>
@@ -1125,7 +1058,7 @@ html.oh-card-reveal .project-card.is-visible{
       <div>
         <div class="footer-title">Contact</div>
         <div class="footer-links">
-          <a href="https://wa.me/2349046183180" target="_blank" rel="noopener">WhatsApp: 0904 618 3180</a>
+          <a href="https://wa.me/2349046193188" target="_blank" rel="noopener">WhatsApp: 0904 619 3188</a>
           <span>Owerri, Imo State</span>
           <span>Serving clients nationwide</span>
         </div>
@@ -1137,7 +1070,7 @@ html.oh-card-reveal .project-card.is-visible{
     </div>
   </div>
 </footer>
-<a class="whatsapp" href="https://wa.me/2349046183180" target="_blank" rel="noopener">WhatsApp</a>
+<a class="whatsapp" href="https://wa.me/2349046193188" target="_blank" rel="noopener">WhatsApp</a>
 
 <script src="script.js"></script>
 <script>
@@ -1212,61 +1145,5 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 
-
-<script>
-/* OdiwommaHome subtle service/project card reveal */
-document.addEventListener("DOMContentLoaded", function () {
-  if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-  if (!("IntersectionObserver" in window)) return;
-
-  const cards = Array.from(document.querySelectorAll(".process-card, .project-card"));
-  if (!cards.length) return;
-
-  document.documentElement.classList.add("oh-card-reveal");
-
-  const observer = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add("is-visible");
-      observer.unobserve(entry.target);
-    });
-  }, {
-    threshold: 0.15,
-    rootMargin: "0px 0px -45px 0px"
-  });
-
-  cards.forEach(function (card, index) {
-    const position = index % 3;
-    card.style.setProperty("--oh-reveal-delay", (position * 100) + "ms");
-    observer.observe(card);
-  });
-});
-</script>
-
-
-<script>
-(function(){
-  const slider=document.querySelector('.oh-slider');
-  if(!slider) return;
-  const slides=[...slider.querySelectorAll('.oh-slide')];
-  const dots=[...slider.querySelectorAll('.oh-dots button')];
-  const prev=slider.querySelector('.oh-prev');
-  const next=slider.querySelector('.oh-next');
-  let index=0,timer;
-  function show(i){
-    index=(i+slides.length)%slides.length;
-    slides.forEach((s,n)=>s.classList.toggle('is-active',n===index));
-    dots.forEach((d,n)=>{d.classList.toggle('is-active',n===index);d.setAttribute('aria-selected',n===index?'true':'false');});
-  }
-  function start(){clearInterval(timer);if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches) timer=setInterval(()=>show(index+1),6000);}
-  prev.addEventListener('click',()=>{show(index-1);start();});
-  next.addEventListener('click',()=>{show(index+1);start();});
-  dots.forEach((d,n)=>d.addEventListener('click',()=>{show(n);start();}));
-  slider.addEventListener('mouseenter',()=>clearInterval(timer));
-  slider.addEventListener('mouseleave',start);
-  document.addEventListener('visibilitychange',()=>document.hidden?clearInterval(timer):start());
-  start();
-})();
-</script>
 </body>
 </html>
