@@ -198,16 +198,17 @@ footer a:hover{color:white}
   --shadow:0 18px 45px rgba(22,48,43,.10);
   --shadow-soft:0 10px 28px rgba(22,48,43,.08);
 }
-body{background:var(--bg);color:var(--ink);}
+body{background:var(--bg);color:var(--ink);font-weight:700;}
 .site-header{background:rgba(245,241,232,.94);border-color:rgba(22,48,43,.14);}
 .logo{mix-blend-mode:multiply;border-radius:18px;filter:drop-shadow(0 5px 10px rgba(22,48,43,.08));}
 .nav-links a:hover,.nav-links a.active{color:var(--accent);}
+.nav-links{font-weight:800;}
 .nav-links a.active:after{background:var(--accent);}
 .nav-cta,.btn{border-radius:4px;background:var(--ink);border-color:var(--ink);box-shadow:0 8px 20px rgba(22,48,43,.12);}
 .nav-cta:hover,.btn:hover{background:var(--accent);border-color:var(--accent);}
 .btn.secondary{background:transparent;color:var(--ink);border-color:var(--line);box-shadow:none;}
 .btn.secondary:hover{background:var(--sage);border-color:var(--sage);}
-.eyebrow{color:var(--accent);}
+.eyebrow{color:var(--accent);font-weight:900;}
 h1 em,h2 em{color:var(--accent);}
 .card,.contact-card,.form,.product-card{border-color:rgba(22,48,43,.14);box-shadow:var(--shadow-soft);border-radius:16px;}
 .card:hover,.product-card:hover{transform:translateY(-5px);box-shadow:var(--shadow);}
@@ -222,7 +223,7 @@ h1 em,h2 em{color:var(--accent);}
 footer{background:var(--ink);}
 .footer-logo{mix-blend-mode:screen;background:transparent;border-radius:18px;}
 .whatsapp{background:var(--ink);border-radius:999px;box-shadow:0 12px 28px rgba(22,48,43,.20);}
-.whatsapp:hover{background:var(--accent);}
+.whatsapp:hover{background:#fff0a3;}
 input,textarea,select{border-color:var(--line);border-radius:10px;}
 input:focus,textarea:focus,select:focus{outline:2px solid rgba(201,120,61,.22);border-color:var(--accent);}
 @media(max-width:900px){
@@ -836,17 +837,172 @@ input:focus,textarea:focus,select:focus{
 
 
 <style>
-/* OdiwommaHome trust number count animation */
-.trust-number{
-  display:block;
-  min-height:1em;
-  transition:transform .25s ease, opacity .25s ease;
+/* OdiwommaHome dark visual system */
+:root{
+  --bg:#202124;
+  --surface:#2a2c2f;
+  --ink:#f8f8f5;
+  --muted:#e5e5df;
+  --accent:#ffd400;
+  --accent-dark:#d9b300;
+  --sand:#303236;
+  --line:rgba(255,255,255,.16);
+  --white:#ffffff;
 }
-.trust-item.is-counting .trust-number{
-  transform:scale(1.04);
+body{background:var(--bg);color:var(--ink);font-weight:700;}
+.topbar{background:#111214;color:#ffd400;}
+.site-header{background:rgba(32,33,36,.96);border-bottom-color:var(--line);}
+.nav-links a:hover,.nav-links a.active{color:var(--accent);}
+.nav-links{font-weight:800;}
+.nav-links a.active:after{background:var(--accent);}
+.nav-cta,.btn{border-color:var(--accent);background:var(--accent);color:#17181a;box-shadow:0 8px 24px rgba(255,212,0,.16);font-weight:900;}
+.nav-cta:hover,.btn:hover{background:#fff0a3;border-color:#fff0a3;}
+.btn.secondary{background:#f7f7f4;color:#17181a;border-color:#f7f7f4;}
+.btn.secondary:hover{background:var(--accent);color:#17181a;border-color:var(--accent);}
+.menu{color:var(--ink);border-color:var(--line);}
+.eyebrow{color:var(--accent);font-weight:900;}
+h1 em,h2 em{color:var(--accent);}
+.lead,.section-head p,.card p,.about-copy p,.page-hero p{color:var(--muted);font-weight:700;}
+.hero-media{background:#17181a;}
+.hero-overlay{background:rgba(17,18,20,.92);border:1px solid rgba(255,255,255,.18);box-shadow:0 14px 35px rgba(0,0,0,.35);}
+.section.alt{background:#242629;}
+.section.dark{background:#111214;}
+.cards,.projects-grid{gap:22px;}
+.card{background:#f7f7f4;color:#17181a;border:1px solid rgba(255,255,255,.55);border-radius:16px;box-shadow:0 18px 38px rgba(255,255,255,.10),0 8px 18px rgba(0,0,0,.35);transition:transform .25s ease,box-shadow .25s ease;}
+.card:hover{transform:translateY(-5px);box-shadow:0 24px 46px rgba(255,255,255,.14),0 12px 24px rgba(0,0,0,.42);}
+.card .num{color:#c5a500;font-weight:900;}
+.card p{color:#303236;font-weight:700;}
+.trust-item{background:#f7f7f4!important;color:#17181a!important;border-color:rgba(255,255,255,.55)!important;box-shadow:0 18px 38px rgba(255,255,255,.10),0 8px 18px rgba(0,0,0,.35)!important;}
+.page-hero{background:#242629;border-bottom-color:var(--line);}
+.about-panel,.contact-card,.form,.product{background:#f7f7f4;color:#17181a;border-color:rgba(255,255,255,.55);box-shadow:0 18px 38px rgba(255,255,255,.10),0 8px 18px rgba(0,0,0,.35);}
+.contact-card p,.contact-card a,.contact-card span,.form label{color:#303236;font-weight:700;}
+input,textarea,select{background:#f7f7f4;color:#17181a;border-color:#cfcfc9;font-weight:700;}
+.shop-banner{background:#111214;}
+footer{background:#111214;}
+.whatsapp{background:#ffd400;color:#17181a;box-shadow:0 12px 28px rgba(255,255,255,.12),0 8px 18px rgba(0,0,0,.35);}
+.whatsapp:hover{background:#fff0a3;}
+.home-contact-follow{padding:100px 0;background:#242629;}
+.home-contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+.home-info-box{background:#f7f7f4;color:#17181a;border:1px solid rgba(255,255,255,.55);border-radius:18px;padding:30px;box-shadow:0 18px 38px rgba(255,255,255,.10),0 8px 18px rgba(0,0,0,.35);}
+.home-info-box h3{margin:0 0 10px;color:#17181a;font-size:30px;font-weight:900;}
+.home-info-box p{margin:0;color:#303236;font-size:14px;font-weight:700;}
+.home-socials{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px;}
+.home-social{display:block;padding:16px;border:1px solid #d8d0c4;border-radius:12px;background:#fffdfa;color:#17181a;font-weight:900;font-size:13px;transition:transform .2s ease,box-shadow .2s ease;}
+.home-social:hover{transform:translateY(-3px);box-shadow:0 10px 22px rgba(0,0,0,.16);}
+
+/* Dark charcoal + bright yellow content treatment */
+h1,h2,h3{font-family:var(--sans);font-weight:900;letter-spacing:-.035em;}
+h1 em,h2 em{color:var(--accent);font-style:normal;}
+.hero-copy .lead,.section-head>p,.mission-copy p,.video-request .section-head>p,.home-contact-follow .section-head>p{background:#f7f7f4;color:#17181a;border:1px solid rgba(255,255,255,.8);border-radius:14px;padding:18px 20px;box-shadow:0 12px 28px rgba(255,255,255,.10),0 10px 22px rgba(0,0,0,.35);}
+.card,.process-card,.home-info-box,.trust-item{box-shadow:0 14px 30px rgba(255,255,255,.12),0 12px 26px rgba(0,0,0,.38)!important;}
+.card h3,.process-card h3{font-weight:900;}
+.process-card{background:#f7f7f4!important;color:#17181a!important;border:1px solid rgba(255,255,255,.75)!important;}
+.process-card p{color:#303236!important;font-weight:700;}
+.trust-label{font-weight:900;}
+.home-social{box-shadow:0 8px 20px rgba(255,255,255,.08),0 8px 18px rgba(0,0,0,.22);}
+
+@media(max-width:900px){
+  .nav-links{background:#202124;border-bottom-color:var(--line);}
+  .home-contact-grid{grid-template-columns:1fr;}
 }
-@media (prefers-reduced-motion: reduce){
-  .trust-number{transition:none;}
+@media(max-width:600px){
+  .home-socials{grid-template-columns:1fr;}
+  .home-contact-follow{padding:75px 0;}
+}
+</style>
+
+<style>
+/* Final dark theme readability correction */
+body{background:#202124!important;color:#f7f7f4!important;font-weight:700!important;}
+
+.site-header{background:rgba(32,33,36,.98)!important;border-bottom:1px solid rgba(255,255,255,.16)!important;}
+.nav-links a{color:#f7f7f4!important;font-weight:900!important;}
+.nav-links a:hover,.nav-links a.active{color:#ffd400!important;}
+.nav-links a.active:after{background:#ffd400!important;}
+.nav-cta{background:#ffd400!important;color:#17181a!important;border-color:#ffd400!important;font-weight:900!important;}
+
+.hero{background:#202124!important;}
+.hero-copy{background:#202124!important;}
+.hero h1{color:#f7f7f4!important;font-weight:900!important;text-shadow:0 2px 12px rgba(0,0,0,.35);}
+.hero h1 em{color:#ffd400!important;}
+.hero-copy .lead{background:#f7f7f4!important;color:#17181a!important;font-weight:800!important;border:1px solid #fff!important;box-shadow:0 12px 28px rgba(0,0,0,.4)!important;}
+.eyebrow{color:#ffd400!important;font-weight:900!important;}
+.hero-overlay{background:rgba(17,18,20,.94)!important;color:#fff!important;border:1px solid rgba(255,212,0,.55)!important;}
+.hero-overlay strong{color:#fff!important;font-weight:900!important;}
+.hero-overlay span{color:#ffd400!important;font-weight:800!important;}
+.btn{background:#ffd400!important;color:#17181a!important;border-color:#ffd400!important;font-weight:900!important;box-shadow:0 10px 24px rgba(255,212,0,.16)!important;}
+.btn:hover{background:#fff0a3!important;color:#17181a!important;border-color:#fff0a3!important;}
+.btn.secondary{background:#f7f7f4!important;color:#17181a!important;border-color:#f7f7f4!important;}
+.btn.secondary:hover{background:#ffd400!important;border-color:#ffd400!important;}
+
+.section{background:#202124!important;color:#f7f7f4!important;}
+.section.alt{background:#242629!important;color:#f7f7f4!important;}
+.section.dark{background:#111214!important;color:#f7f7f4!important;}
+.section-head h2,.mission-grid h2,.section h2{color:#f7f7f4!important;font-weight:900!important;}
+.section-head h2 em,.mission-grid h2 em,.section h2 em{color:#ffd400!important;}
+.section-head>p,.mission-copy p{color:#17181a!important;background:#f7f7f4!important;border:1px solid #fff!important;border-radius:14px!important;padding:18px 20px!important;font-weight:800!important;box-shadow:0 12px 28px rgba(255,255,255,.08),0 10px 22px rgba(0,0,0,.38)!important;}
+
+.card{background:#f7f7f4!important;color:#17181a!important;border-color:#fff!important;}
+.card h3{color:#17181a!important;font-weight:900!important;}
+.card p{color:#303236!important;font-weight:800!important;}
+.card .num{color:#b38f00!important;font-weight:900!important;}
+
+.trust-section{background:#202124!important;}
+.trust-item{background:#f7f7f4!important;color:#17181a!important;}
+.trust-number{color:#17181a!important;font-weight:900!important;}
+.trust-label{color:#303236!important;font-weight:900!important;}
+
+.mission-section{background:#202124!important;}
+.mission-copy p{margin-bottom:16px!important;}
+
+.process-section{background:#242629!important;}
+.process-card{background:#f7f7f4!important;color:#17181a!important;border-color:#fff!important;}
+.process-card h3{color:#17181a!important;font-weight:900!important;}
+.process-card p{color:#303236!important;font-weight:800!important;}
+.process-card .num{color:#17181a!important;font-weight:900!important;background:#ffd400!important;}
+
+.projects-grid .project-card{box-shadow:0 16px 34px rgba(0,0,0,.42)!important;}
+.section.alt .section-head h2{color:#f7f7f4!important;}
+.project-label{color:#fff!important;}
+.project-label small{color:#ffd400!important;font-weight:900!important;}
+.project-label strong{color:#fff!important;font-weight:900!important;}
+
+.video-request{background:#202124!important;color:#f7f7f4!important;}
+.video-request .container{background:#242629!important;border:1px solid rgba(255,255,255,.14)!important;}
+.video-request h2{color:#f7f7f4!important;}
+.video-request h2 em{color:#ffd400!important;}
+.video-request .section-head>p{color:#17181a!important;background:#f7f7f4!important;}
+.video-request .video-step{background:#f7f7f4!important;color:#17181a!important;border-color:#fff!important;box-shadow:0 10px 24px rgba(0,0,0,.28)!important;}
+.video-request .video-step strong{color:#17181a!important;font-weight:900!important;}
+.video-request .video-step span{color:#303236!important;font-weight:700!important;}
+
+.section.dark .section-head h2{color:#fff!important;}
+.section.dark .section-head h2 em{color:#ffd400!important;}
+.section.dark .btn{background:#ffd400!important;color:#17181a!important;}
+
+.home-contact-follow{background:#242629!important;color:#f7f7f4!important;}
+.home-contact-follow h2{color:#fff!important;}
+.home-contact-follow h2 em{color:#ffd400!important;}
+.home-contact-follow .section-head>p{color:#17181a!important;background:#f7f7f4!important;}
+.home-info-box{background:#f7f7f4!important;color:#17181a!important;border-color:#fff!important;}
+.home-info-box h3{color:#17181a!important;font-weight:900!important;}
+.home-info-box p,.home-info-box a{color:#303236!important;font-weight:800!important;}
+.home-social{background:#fff!important;color:#17181a!important;border-color:#d5d5cf!important;}
+.home-social span{color:#4b4d50!important;}
+
+footer{background:#111214!important;color:#fff!important;}
+.footer-title{color:#ffd400!important;font-weight:900!important;}
+footer p,footer a,footer span{color:#f0f0eb!important;font-weight:700!important;}
+footer a:hover{color:#ffd400!important;}
+.footer-bottom{color:#bfc0bb!important;border-color:rgba(255,255,255,.2)!important;}
+
+.whatsapp{background:#ffd400!important;color:#17181a!important;border:2px solid #ffd400!important;font-weight:900!important;box-shadow:0 12px 28px rgba(0,0,0,.45)!important;}
+.whatsapp:hover{background:#fff0a3!important;color:#17181a!important;}
+
+@media(max-width:900px){
+  .nav-links{background:#202124!important;}
+  .nav-links a{color:#f7f7f4!important;}
+  .nav-links a:hover{color:#ffd400!important;}
 }
 </style>
 
@@ -859,7 +1015,7 @@ input:focus,textarea:focus,select:focus{
     <a href="index.html" aria-label="OdiwommaHome home"><img class="logo" src="logo.jpg" alt="OdiwommaHome logo"></a>
     <button class="menu" aria-label="Open navigation" aria-expanded="false">Menu</button>
     <nav class="nav-links" aria-label="Main navigation">
-      <a href="index.html" class="active">Home</a><a href="projects.html" class="">Projects</a><a href="services.html" class="">Services</a><a href="finishes.html" class="">Finishes</a><a href="about.html" class="">About</a><a href="contact.html" class="">Contact</a><a href="shop.html" class="">Shop</a>
+      <a href="index.html" class="active">Home</a><a href="projects.html" class="">Projects</a><a href="inspiration.html" class="">Inspiration</a><a href="services.html" class="">Services</a><a href="finishes.html" class="">Finishes</a><a href="about.html" class="">About</a><a href="contact.html" class="">Contact</a><a href="shop.html" class="">Shop</a>
       <a class="nav-cta" href="contact.html">Start a Project</a>
     </nav>
   </div>
@@ -874,7 +1030,7 @@ input:focus,textarea:focus,select:focus{
     <p class="lead">OdiwommaHome brings together professional painting, wall preparation, decorative finishes and practical home improvement to help every space feel finished.</p>
     <div class="actions">
       <a class="btn" href="contact.html">Start a Project</a>
-      <a class="btn secondary" href="projects.html">Explore Our Inspirations</a>
+      <a class="btn secondary" href="inspiration.html">Explore Our Inspirations</a>
     </div>
   </div>
   <div class="hero-media">
@@ -1032,6 +1188,35 @@ input:focus,textarea:focus,select:focus{
 </main>
 
 
+
+<section class="home-contact-follow">
+  <div class="container">
+    <div class="section-head">
+      <div><div class="eyebrow">Stay connected</div><h2>Find us.<br><em>Follow the work.</em></h2></div>
+      <p>Visit our office, reach us directly or follow OdiwommaHome for new projects, finishes and design inspiration.</p>
+    </div>
+    <div class="home-contact-grid">
+      <div class="home-info-box">
+        <div class="eyebrow">Get in touch</div>
+        <h3>Office</h3>
+        <p>Owerri, Imo State, Nigeria</p>
+        <p class="address-note">Office location: Owerri, Imo State</p>
+        <p style="margin-top:8px">Serving clients nationwide.</p>
+        <p style="margin-top:18px"><a href="https://wa.me/2349046193188" target="_blank" rel="noopener"><strong>WhatsApp: 0904 619 3188</strong></a></p>
+      </div>
+      <div class="home-info-box">
+        <div class="eyebrow">Follow us</div>
+        <h3>Social</h3>
+        <div class="home-socials">
+          <div class="home-social">Instagram<br><span style="font-weight:700;color:#5b5c60">@OdiwommaHome</span></div>
+          <div class="home-social">Facebook<br><span style="font-weight:700;color:#5b5c60">OdiwommaHome</span></div>
+          <div class="home-social">TikTok<br><span style="font-weight:700;color:#5b5c60">@OdiwommaHome</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <footer>
   <div class="container">
     <div class="footer-grid">
@@ -1073,77 +1258,6 @@ input:focus,textarea:focus,select:focus{
 <a class="whatsapp" href="https://wa.me/2349046193188" target="_blank" rel="noopener">WhatsApp</a>
 
 <script src="script.js"></script>
-<script>
-/* OdiwommaHome animated trust numbers */
-document.addEventListener("DOMContentLoaded", function () {
-  const items = document.querySelectorAll(".trust-item");
-
-  if (!items.length) return;
-
-  const targets = [
-    { value: 10, suffix: "+", decimals: 0 },
-    { value: 500, suffix: "+", decimals: 0 },
-    { value: 100, suffix: "%", decimals: 0 }
-  ];
-
-  function animateNumber(item, config) {
-    if (item.dataset.counted === "true") return;
-    item.dataset.counted = "true";
-    item.classList.add("is-counting");
-
-    const number = item.querySelector(".trust-number");
-    if (!number) return;
-
-    const durations = [2000, 2300, 2100];
-    const duration = durations[Array.from(items).indexOf(item)] || 2100;
-    const start = performance.now();
-
-    function easeOut(t) {
-      return 1 - Math.pow(1 - t, 3);
-    }
-
-    function frame(now) {
-      const progress = Math.min((now - start) / duration, 1);
-      const current = config.value * easeOut(progress);
-      number.textContent =
-        Math.round(current).toLocaleString() + config.suffix;
-
-      if (progress < 1) {
-        requestAnimationFrame(frame);
-      } else {
-        number.textContent =
-          config.value.toLocaleString() + config.suffix;
-        item.classList.remove("is-counting");
-      }
-    }
-
-    requestAnimationFrame(frame);
-  }
-
-  if ("IntersectionObserver" in window) {
-    const observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-
-        const index = Array.from(items).indexOf(entry.target);
-        if (targets[index]) {
-          animateNumber(entry.target, targets[index]);
-        }
-
-        observer.unobserve(entry.target);
-      });
-    }, { threshold: 0.35 });
-
-    items.forEach(function (item) {
-      observer.observe(item);
-    });
-  } else {
-    items.forEach(function (item, index) {
-      if (targets[index]) animateNumber(item, targets[index]);
-    });
-  }
-});
-</script>
 
 </body>
 </html>
